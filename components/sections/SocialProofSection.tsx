@@ -62,7 +62,7 @@ export default function SocialProofSection() {
           They found their answers
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => {
             const MotionCard = motion(Card);
             return (
@@ -74,9 +74,9 @@ export default function SocialProofSection() {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="hover:shadow-md transition-shadow duration-200"
               >
-                <CardContent>
+                <CardContent className="space-y-4">
                   {/* Star Rating */}
-                  <div className="flex gap-1 mb-4">
+                  <div className="flex gap-1">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
                       <svg
                         key={i}
@@ -89,12 +89,12 @@ export default function SocialProofSection() {
                   </div>
 
                   {/* Testimonial Content */}
-                  <p className="text-base text-foreground mb-4 leading-relaxed italic">
+                  <p className="text-base text-foreground leading-relaxed italic">
                     "{testimonial.content}"
                   </p>
 
                   {/* Client Name */}
-                  <p className="text-sm font-medium text-muted-foreground">
+                  <p className="text-sm font-medium text-muted-foreground pt-2">
                     — {testimonial.clientName}
                   </p>
                 </CardContent>

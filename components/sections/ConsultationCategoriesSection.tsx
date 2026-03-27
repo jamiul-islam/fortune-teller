@@ -95,7 +95,7 @@ export default function ConsultationCategoriesSection() {
           What is your urgent concern today?
         </motion.h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category, index) => {
             const MotionCard = motion(Card);
             return (
@@ -107,20 +107,22 @@ export default function ConsultationCategoriesSection() {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="hover:shadow-md transition-shadow duration-200 min-h-[44px]"
               >
-                <CardHeader>
+                <CardHeader className="pb-4">
                   {/* Icon */}
-                  <div className="text-5xl mb-2">{category.icon}</div>
-                  <CardTitle className="text-xl">{category.title}</CardTitle>
+                  <div className="text-5xl mb-4">{category.icon}</div>
+                  <CardTitle className="text-xl font-bold">
+                    {category.title}
+                  </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="pt-0">
                   {/* Subcategories */}
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {category.subcategories.map((sub, idx) => (
                       <li
                         key={idx}
-                        className="text-sm text-muted-foreground flex items-start"
+                        className="text-sm text-muted-foreground flex items-start leading-relaxed"
                       >
-                        <span className="mr-2">•</span>
+                        <span className="mr-2 mt-1">•</span>
                         <span>{sub}</span>
                       </li>
                     ))}

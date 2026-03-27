@@ -50,7 +50,7 @@ export default function TrustSection() {
           A reliable and confidential consultation
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {trustIndicators.map((indicator, index) => {
             const MotionCard = motion(Card);
             return (
@@ -62,11 +62,13 @@ export default function TrustSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200 min-h-[44px]"
               >
-                <CardHeader className="items-center">
-                  <div className="text-6xl mb-2">{indicator.icon}</div>
-                  <CardTitle className="text-xl">{indicator.title}</CardTitle>
+                <CardHeader className="items-center pb-4">
+                  <div className="text-6xl mb-4">{indicator.icon}</div>
+                  <CardTitle className="text-xl font-bold">
+                    {indicator.title}
+                  </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="pt-0">
                   <p className="text-base text-muted-foreground leading-relaxed">
                     {indicator.description}
                   </p>

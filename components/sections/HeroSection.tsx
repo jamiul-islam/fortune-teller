@@ -72,17 +72,17 @@ export default function HeroSection({
         ) : (
           <div className="absolute inset-0 bg-muted" />
         )}
-        {/* Subtle overlay for text readability */}
-        <div className="absolute inset-0 bg-linear-to-b from-background/0 via-background/30 to-background/80" />
+        {/* Dark overlay for text readability - 70% opacity */}
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
-      {/* Content */}
+      {/* Content - Vertically and horizontally centered */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-8 text-center max-w-5xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-white"
           style={{ fontFamily: "var(--font-serif)" }}
         >
           Your future is trying to speak to you
@@ -92,7 +92,7 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
-          className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl"
+          className="text-lg sm:text-xl md:text-2xl text-white/90 mb-12 max-w-2xl"
         >
           Clarity. Guidance. Immediate answers
         </motion.p>
@@ -102,7 +102,12 @@ export default function HeroSection({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
         >
-          <Button variant="default" size="lg" onClick={onCtaClick}>
+          <Button
+            variant="default"
+            size="lg"
+            onClick={onCtaClick}
+            className="bg-white text-black hover:bg-white/90 font-semibold text-lg px-8 py-6 h-auto"
+          >
             Book a Reading
           </Button>
         </motion.div>

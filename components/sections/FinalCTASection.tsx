@@ -32,7 +32,7 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
             variant="outline"
             size="lg"
             onClick={onCtaClick}
-            className="bg-background text-foreground hover:bg-background/90 border-background"
+            className="bg-white text-black hover:bg-white/90 border-white font-semibold text-lg px-8 py-6 h-auto"
           >
             Book a Reading
           </Button>
