@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { motion } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import Button from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 interface HeroSectionProps {
   videoUrl: string;
@@ -73,7 +73,7 @@ export default function HeroSection({
           <div className="absolute inset-0 bg-muted" />
         )}
         {/* Subtle overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/30 to-background/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-background/0 via-background/30 to-background/80" />
       </div>
 
       {/* Content */}

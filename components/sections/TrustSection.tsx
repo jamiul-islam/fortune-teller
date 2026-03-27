@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 interface TrustIndicator {
   id: string;
@@ -50,24 +51,29 @@ export default function TrustSection() {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {trustIndicators.map((indicator, index) => (
-            <motion.div
-              key={indicator.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex flex-col items-center text-center p-8 bg-card border border-border rounded-lg hover:shadow-md transition-shadow duration-200 min-h-[44px]"
-            >
-              <div className="text-6xl mb-6">{indicator.icon}</div>
-              <h3 className="text-xl font-semibold mb-4 text-foreground">
-                {indicator.title}
-              </h3>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                {indicator.description}
-              </p>
-            </motion.div>
-          ))}
+          {trustIndicators.map((indicator, index) => {
+            const MotionCard = motion(Card);
+            return (
+              <MotionCard
+                key={indicator.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200 min-h-[44px]"
+              >
+                <CardHeader className="items-center">
+                  <div className="text-6xl mb-2">{indicator.icon}</div>
+                  <CardTitle className="text-xl">{indicator.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    {indicator.description}
+                  </p>
+                </CardContent>
+              </MotionCard>
+            );
+          })}
         </div>
       </div>
     </SectionWrapper>

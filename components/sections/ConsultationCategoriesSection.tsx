@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 interface Category {
   id: string;
@@ -95,37 +96,39 @@ export default function ConsultationCategoriesSection() {
         </motion.h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((category, index) => (
-            <motion.div
-              key={category.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="bg-card border border-border rounded-lg p-6 hover:shadow-md transition-shadow duration-200 min-h-[44px]"
-            >
-              {/* Icon */}
-              <div className="text-5xl mb-4">{category.icon}</div>
-
-              {/* Title */}
-              <h3 className="text-xl font-semibold mb-4 text-foreground">
-                {category.title}
-              </h3>
-
-              {/* Subcategories */}
-              <ul className="space-y-2">
-                {category.subcategories.map((sub, idx) => (
-                  <li
-                    key={idx}
-                    className="text-sm text-muted-foreground flex items-start"
-                  >
-                    <span className="mr-2">•</span>
-                    <span>{sub}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          {categories.map((category, index) => {
+            const MotionCard = motion(Card);
+            return (
+              <MotionCard
+                key={category.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                className="hover:shadow-md transition-shadow duration-200 min-h-[44px]"
+              >
+                <CardHeader>
+                  {/* Icon */}
+                  <div className="text-5xl mb-2">{category.icon}</div>
+                  <CardTitle className="text-xl">{category.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {/* Subcategories */}
+                  <ul className="space-y-2">
+                    {category.subcategories.map((sub, idx) => (
+                      <li
+                        key={idx}
+                        className="text-sm text-muted-foreground flex items-start"
+                      >
+                        <span className="mr-2">•</span>
+                        <span>{sub}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </MotionCard>
+            );
+          })}
         </div>
       </motion.div>
     </SectionWrapper>

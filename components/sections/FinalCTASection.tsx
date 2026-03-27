@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import Button from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 interface FinalCTASectionProps {
   onCtaClick: () => void;
