@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import Particles from "../ui/Particles";
 
 interface Category {
   id: string;
@@ -84,7 +85,26 @@ export default function ConsultationCategoriesSection() {
       className="relative flex items-center justify-center py-20 px-4 sm:px-6 md:px-8 bg-muted/30"
       style={{ padding: " 0 .8em" }}
     >
-      <motion.div style={{ opacity }} className="w-full max-w-7xl">
+      {/* Particles Background */}
+      <div className="absolute inset-0 z-0">
+        <Particles
+          particleColors={["#ffffff"]}
+          particleCount={500}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover
+          alphaParticles
+          disableRotation={false}
+          pixelRatio={1}
+        />
+      </div>
+
+      {/* Content */}
+      <motion.div
+        style={{ opacity }}
+        className="relative z-10 w-full max-w-7xl"
+      >
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
