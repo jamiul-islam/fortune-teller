@@ -22,7 +22,10 @@ export default function HeroSection({
       const urlObj = new URL(url);
       let videoId = "";
 
-      if (urlObj.hostname.includes("youtube.com")) {
+      // Handle already-embedded URLs
+      if (urlObj.pathname.includes("/embed/")) {
+        videoId = urlObj.pathname.split("/embed/")[1].split("?")[0];
+      } else if (urlObj.hostname.includes("youtube.com")) {
         videoId = urlObj.searchParams.get("v") || "";
       } else if (urlObj.hostname.includes("youtu.be")) {
         videoId = urlObj.pathname.slice(1);
@@ -44,17 +47,25 @@ export default function HeroSection({
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         {!videoError && embedUrl ? (
-          <iframe
-            src={embedUrl}
-            title="Hero Background Video"
-            className="absolute top-1/2 left-1/2 w-[100vw] h-[100vh] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-            allow="autoplay; encrypted-media"
-            onError={() => setVideoError(true)}
-            style={{
-              border: "none",
-              objectFit: "cover",
-            }}
-          />
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+            <iframe
+              src={embedUrl}
+              title="Hero Background Video"
+              className="absolute pointer-events-none"
+              allow="autoplay; encrypted-media"
+              onError={() => setVideoError(true)}
+              style={{
+                border: "none",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "100vw",
+                height: "56.25vw", // 16:9 aspect ratio
+                minHeight: "100vh",
+                minWidth: "177.77vh", // 16:9 aspect ratio
+              }}
+            />
+          </div>
         ) : (
           <div
             className="absolute inset-0 bg-gradient-to-br from-[#7b241c] via-[#922b21] to-[#c0392b]"
@@ -63,7 +74,7 @@ export default function HeroSection({
           />
         )}
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-[#1a1a1a] bg-opacity-40" />
+        <div className="absolute inset-0 bg-[#1a1a1a]/40" />
       </div>
 
       {/* Content */}
