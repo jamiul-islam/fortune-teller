@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { useState, useRef } from "react";
+import { motion } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";
 
@@ -17,26 +17,12 @@ export default function HeroSection({
   const [videoError, setVideoError] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Parallax effect for background
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const contentOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [1, 0.8, 0],
-  );
-
   // Extract YouTube video ID from URL
   const getYouTubeEmbedUrl = (url: string) => {
     try {
       const urlObj = new URL(url);
       let videoId = "";
 
-      // Handle already-embedded URLs
       if (urlObj.pathname.includes("/embed/")) {
         videoId = urlObj.pathname.split("/embed/")[1].split("?")[0];
       } else if (urlObj.hostname.includes("youtube.com")) {
@@ -57,9 +43,12 @@ export default function HeroSection({
   const embedUrl = getYouTubeEmbedUrl(videoUrl);
 
   return (
-    <SectionWrapper ref={sectionRef} className="relative overflow-hidden">
-      {/* Cosmic Background with Parallax */}
-      <motion.div className="absolute inset-0 z-0" style={{ y: backgroundY }}>
+    <SectionWrapper
+      ref={sectionRef}
+      className="relative overflow-hidden bg-background"
+    >
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
         {!videoError && embedUrl ? (
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
             <iframe
@@ -81,84 +70,43 @@ export default function HeroSection({
             />
           </div>
         ) : (
-          <div
-            className="absolute inset-0 bg-cosmic-purple-900"
-            role="img"
-            aria-label="Mystical cosmic background"
-          />
+          <div className="absolute inset-0 bg-muted" />
         )}
-        {/* Gradient overlay for text readability */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(10, 1, 24, 0) 0%, rgba(10, 1, 24, 0.8) 100%)",
-          }}
-        />
-      </motion.div>
+        {/* Subtle overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/30 to-background/80" />
+      </div>
 
-      {/* Content with fade on scroll */}
-      <motion.div
-        className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-8 text-center"
-        style={{ opacity: contentOpacity }}
-      >
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-8 text-center max-w-5xl mx-auto">
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            ease: [0.4, 0, 0.2, 1],
-          }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-4 sm:mb-6 max-w-5xl leading-tight px-2"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            background: "linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            textShadow: "0 0 40px rgba(255, 215, 0, 0.3)",
-          }}
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+          style={{ fontFamily: "var(--font-serif)" }}
         >
           Your future is trying to speak to you
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.2,
-            ease: [0.4, 0, 0.2, 1],
-          }}
-          className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-pearl-white mb-8 sm:mb-10 md:mb-12 max-w-3xl px-2"
-          style={{
-            fontFamily: "var(--font-body)",
-            fontWeight: 400,
-            textShadow: "0 2px 20px rgba(248, 247, 255, 0.2)",
-          }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
+          className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl"
         >
           Clarity. Guidance. Immediate answers
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 40, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.4,
-            ease: [0.4, 0, 0.2, 1],
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
         >
-          <Button
-            variant="primary"
-            onClick={onCtaClick}
-            className="text-base sm:text-lg md:text-xl font-semibold"
-          >
+          <Button variant="default" size="lg" onClick={onCtaClick}>
             Book a Reading
           </Button>
         </motion.div>
-      </motion.div>
+      </div>
     </SectionWrapper>
   );
 }

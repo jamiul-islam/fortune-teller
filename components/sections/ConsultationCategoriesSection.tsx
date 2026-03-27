@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, stagger } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
 interface Category {
@@ -68,30 +68,6 @@ const categories: Category[] = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      delayChildren: stagger(0.1, { startDelay: 0.2 }),
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-    },
-  },
-};
-
 export default function ConsultationCategoriesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -99,127 +75,58 @@ export default function ConsultationCategoriesSection() {
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-
-  // Parallax effect for decorative elements
-  const glowY1 = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const glowY2 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
     <SectionWrapper
       ref={sectionRef}
-      className="relative flex items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #3d2963 100%)",
-      }}
+      className="relative flex items-center justify-center py-20 px-4 sm:px-6 md:px-8 bg-muted/30"
     >
-      {/* Decorative glow effects with parallax */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 rounded-full opacity-20 blur-3xl"
-        style={{
-          background: "radial-gradient(circle, #7c4dff 0%, transparent 70%)",
-          y: glowY1,
-        }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 rounded-full opacity-20 blur-3xl"
-        style={{
-          background: "radial-gradient(circle, #ff6ec7 0%, transparent 70%)",
-          y: glowY2,
-        }}
-      />
-
-      <motion.div
-        style={{ opacity }}
-        className="w-full max-w-7xl relative z-10"
-      >
+      <motion.div style={{ opacity }} className="w-full max-w-7xl">
         <motion.h2
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20 px-2"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            background: "linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
+          style={{ fontFamily: "var(--font-serif)" }}
         >
           What is your urgent concern today?
         </motion.h2>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
-        >
-          {categories.map((category) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categories.map((category, index) => (
             <motion.div
               key={category.id}
-              variants={cardVariants}
-              whileHover={{
-                scale: 1.05,
-                y: -8,
-                transition: { duration: 0.3 },
-              }}
-              className="relative rounded-2xl p-6 sm:p-7 md:p-8 backdrop-blur-xl overflow-hidden group cursor-pointer min-h-[44px]"
-              style={{
-                background: "rgba(61, 41, 99, 0.6)",
-                border: "1px solid rgba(124, 77, 255, 0.3)",
-                boxShadow: "0 8px 32px rgba(124, 77, 255, 0.2)",
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="bg-card border border-border rounded-lg p-6 hover:shadow-md transition-shadow duration-200 min-h-[44px]"
             >
-              {/* Hover glow effect */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background:
-                    "radial-gradient(circle at center, rgba(124, 77, 255, 0.1) 0%, transparent 70%)",
-                }}
-              />
-
               {/* Icon */}
-              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 relative z-10">
-                {category.icon}
-              </div>
+              <div className="text-5xl mb-4">{category.icon}</div>
 
               {/* Title */}
-              <h3
-                className="text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4 relative z-10"
-                style={{
-                  fontFamily: "var(--font-accent)",
-                  fontWeight: 600,
-                  color: "#f8f7ff",
-                }}
-              >
+              <h3 className="text-xl font-semibold mb-4 text-foreground">
                 {category.title}
               </h3>
 
               {/* Subcategories */}
-              <ul className="space-y-1.5 sm:space-y-2 relative z-10">
-                {category.subcategories.map((sub, index) => (
+              <ul className="space-y-2">
+                {category.subcategories.map((sub, idx) => (
                   <li
-                    key={index}
-                    className="text-xs sm:text-sm md:text-base flex items-start"
-                    style={{
-                      color: "#b8b5c8",
-                      fontFamily: "var(--font-body)",
-                    }}
+                    key={idx}
+                    className="text-sm text-muted-foreground flex items-start"
                   >
-                    <span className="mr-2 text-mystic-gold">•</span>
+                    <span className="mr-2">•</span>
                     <span>{sub}</span>
                   </li>
                 ))}
               </ul>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </motion.div>
     </SectionWrapper>
   );
