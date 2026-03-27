@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import FooterSection from "@/components/sections/FooterSection";
 
 export const metadata: Metadata = {
   title: "iTellFortune",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <FooterSection />
+      </body>
     </html>
   );
 }
