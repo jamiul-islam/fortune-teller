@@ -39,6 +39,8 @@ next-env.d.ts
 .idea/
 *.swp
 *.swo
+.kiro/
+/intern-agent-doc
 
 # OS
 .DS_Store
