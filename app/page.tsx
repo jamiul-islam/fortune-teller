@@ -3,11 +3,13 @@
 import HeroSection from "@/components/sections/HeroSection";
 import ConsultationCategoriesSection from "@/components/sections/ConsultationCategoriesSection";
 import SocialProofSection from "@/components/sections/SocialProofSection";
+import TrustSection from "@/components/sections/TrustSection";
+import FinalCTASection from "@/components/sections/FinalCTASection";
 
 export default function Home() {
   const handleCtaClick = () => {
-    // Scroll to booking section or handle CTA action
-    console.log("CTA clicked");
+    // TODO: Implement Calendly inline embed modal/section
+    console.log("CTA clicked - Book a Reading");
   };
 
   return (
@@ -18,6 +20,8 @@ export default function Home() {
       />
       <ConsultationCategoriesSection />
       <SocialProofSection />
+      <TrustSection />
+      <FinalCTASection onCtaClick={handleCtaClick} />
     </main>
   );
 }
