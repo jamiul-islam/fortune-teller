@@ -1,12 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
-  /* Custom color palette - red shades, off-white, near-black (no pure colors) */
-  --color-crimson-dark: #7b241c;
-  --color-crimson: #922b21;
-  --color-crimson-light: #c0392b;
+  /* Mystical Premium Color Palette */
+  --color-cosmic-purple-900: #1a0b2e;
+  --color-cosmic-purple-800: #2d1b4e;
+  --color-cosmic-purple-700: #3d2963;
+  --color-cosmic-purple-600: #5b3a8f;
+  --color-cosmic-purple-500: #7c4dff;
+  --color-cosmic-purple-400: #9d6fff;
+
+  --color-mystic-gold: #ffd700;
+  --color-mystic-gold-glow: #ffed4e;
+  --color-celestial-blue: #4fc3f7;
+  --color-ethereal-pink: #ff6ec7;
+  --color-cosmic-teal: #1de9b6;
+
+  --color-pearl-white: #f8f7ff;
+  --color-soft-gray: #b8b5c8;
+  --color-deep-space: #0a0118;
+
+  /* Additional colors for compatibility */
   --color-off-white: #f5f0eb;
   --color-near-black: #1a1a1a;
+  --color-crimson-light: #c0392b;
+  --color-crimson: #922b21;
+  --color-crimson-dark: #7b241c;
+
+  /* Font Families */
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+  --font-accent: "Cinzel", serif;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(124, 77, 255, 0.1);
+  --shadow-md: 0 4px 16px rgba(124, 77, 255, 0.15);
+  --shadow-lg: 0 8px 32px rgba(124, 77, 255, 0.2);
+  --shadow-xl: 0 16px 48px rgba(124, 77, 255, 0.25);
+  --shadow-glow: 0 0 40px rgba(124, 77, 255, 0.4);
+
+  /* Responsive Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+:root {
+  /* CSS Variables for runtime use */
+  --gradient-cosmic: linear-gradient(
+    135deg,
+    #1a0b2e 0%,
+    #2d1b4e 50%,
+    #3d2963 100%
+  );
+  --gradient-mystical: linear-gradient(135deg, #7c4dff 0%, #ff6ec7 100%);
+  --gradient-gold: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  --gradient-overlay: linear-gradient(
+    180deg,
+    rgba(10, 1, 24, 0) 0%,
+    rgba(10, 1, 24, 0.8) 100%
+  );
+
+  --glass-light: rgba(255, 255, 255, 0.05);
+  --glass-medium: rgba(255, 255, 255, 0.1);
 }
 
 html {
@@ -14,18 +83,15 @@ html {
 }
 
 body {
-  background-color: var(--color-near-black);
-  color: var(--color-off-white);
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
+  background: linear-gradient(135deg, #0a0118 0%, #1a0b2e 50%, #2d1b4e 100%);
+  color: var(--color-pearl-white);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
 /* Base resets */
 * {
   margin: 0;
@@ -33,10 +99,23 @@ body {
   box-sizing: border-box;
 }
 
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
 /* Smooth transitions for interactive elements */
 button,
 a {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Remove default button styles */
@@ -44,6 +123,7 @@ button {
   border: none;
   background: none;
   cursor: pointer;
+  font-family: var(--font-body);
 }
 
 /* Ensure images are responsive by default */
@@ -52,4 +132,55 @@ video {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--color-mystic-gold);
+  color: var(--color-cosmic-purple-900);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cosmic-purple-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--color-cosmic-purple-500),
+    var(--color-ethereal-pink)
+  );
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    var(--color-cosmic-purple-400),
+    var(--color-mystic-gold)
+  );
+}
+
+/* Focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-mystic-gold);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

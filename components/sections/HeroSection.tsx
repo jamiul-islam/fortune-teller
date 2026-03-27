@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import * as motion from "motion/react-client";
+import React, { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";
 
@@ -15,6 +15,20 @@ export default function HeroSection({
   onCtaClick,
 }: HeroSectionProps) {
   const [videoError, setVideoError] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Parallax effect for background
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1, 0.8, 0],
+  );
 
   // Extract YouTube video ID from URL
   const getYouTubeEmbedUrl = (url: string) => {
@@ -43,9 +57,9 @@ export default function HeroSection({
   const embedUrl = getYouTubeEmbedUrl(videoUrl);
 
   return (
-    <SectionWrapper className="relative overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0">
+    <SectionWrapper ref={sectionRef} className="relative overflow-hidden">
+      {/* Cosmic Background with Parallax */}
+      <motion.div className="absolute inset-0 z-0" style={{ y: backgroundY }}>
         {!videoError && embedUrl ? (
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
             <iframe
@@ -60,68 +74,91 @@ export default function HeroSection({
                 left: "50%",
                 transform: "translate(-50%, -50%)",
                 width: "100vw",
-                height: "56.25vw", // 16:9 aspect ratio
+                height: "56.25vw",
                 minHeight: "100vh",
-                minWidth: "177.77vh", // 16:9 aspect ratio
+                minWidth: "177.77vh",
               }}
             />
           </div>
         ) : (
           <div
-            className="absolute inset-0 bg-gradient-to-br from-[#7b241c] via-[#922b21] to-[#c0392b]"
+            className="absolute inset-0 bg-cosmic-purple-900"
             role="img"
-            aria-label="Mystical background"
+            aria-label="Mystical cosmic background"
           />
         )}
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-[#1a1a1a]/40" />
-      </div>
+        {/* Gradient overlay for text readability */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(10, 1, 24, 0) 0%, rgba(10, 1, 24, 0.8) 100%)",
+          }}
+        />
+      </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
+      {/* Content with fade on scroll */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-8 text-center"
+        style={{ opacity: contentOpacity }}
+      >
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 0.8,
-            ease: "easeOut",
+            ease: [0.4, 0, 0.2, 1],
           }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#f5f0eb] mb-6 max-w-4xl"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-4 sm:mb-6 max-w-5xl leading-tight px-2"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            background: "linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            textShadow: "0 0 40px rgba(255, 215, 0, 0.3)",
+          }}
         >
           Your future is trying to speak to you
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 0.8,
             delay: 0.2,
-            ease: "easeOut",
+            ease: [0.4, 0, 0.2, 1],
           }}
-          className="text-xl md:text-2xl lg:text-3xl text-[#f5f0eb] mb-12 max-w-2xl"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-pearl-white mb-8 sm:mb-10 md:mb-12 max-w-3xl px-2"
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 400,
+            textShadow: "0 2px 20px rgba(248, 247, 255, 0.2)",
+          }}
         >
           Clarity. Guidance. Immediate answers
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 40, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{
             duration: 0.8,
             delay: 0.4,
-            ease: "easeOut",
+            ease: [0.4, 0, 0.2, 1],
           }}
         >
           <Button
             variant="primary"
             onClick={onCtaClick}
-            className="text-lg px-8 py-4"
+            className="text-base sm:text-lg md:text-xl font-semibold"
           >
             Book a Reading
           </Button>
         </motion.div>
-      </div>
+      </motion.div>
     </SectionWrapper>
   );
 }
