@@ -57,7 +57,7 @@ export default function SocialProofSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
-          style={{ fontFamily: "var(--font-serif)" }}
+          style={{ fontFamily: "var(--font-serif)", paddingBottom: ".8em" }}
         >
           They found their answers
         </motion.h2>
@@ -73,6 +73,7 @@ export default function SocialProofSection() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="hover:shadow-md transition-shadow duration-200"
+                style={{ padding: ".8em" }}
               >
                 <CardContent className="space-y-4">
                   {/* Star Rating */}

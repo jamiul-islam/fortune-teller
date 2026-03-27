@@ -45,7 +45,7 @@ export default function TrustSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
-          style={{ fontFamily: "var(--font-serif)" }}
+          style={{ fontFamily: "var(--font-serif)", paddingBottom: ".8em" }}
         >
           A reliable and confidential consultation
         </motion.h2>
@@ -60,15 +60,16 @@ export default function TrustSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200 min-h-[44px]"
+                className="hover:shadow-md transition-shadow duration-200"
+                style={{ padding: ".8em" }}
               >
-                <CardHeader className="items-center pb-4">
+                <CardHeader className="flex flex-col items-center text-center pb-4">
                   <div className="text-6xl mb-4">{indicator.icon}</div>
                   <CardTitle className="text-xl font-bold">
                     {indicator.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="pt-0">
+                <CardContent className="pt-0 text-center">
                   <p className="text-base text-muted-foreground leading-relaxed">
                     {indicator.description}
                   </p>

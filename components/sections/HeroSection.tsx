@@ -72,18 +72,22 @@ export default function HeroSection({
         ) : (
           <div className="absolute inset-0 bg-muted" />
         )}
-        {/* Dark overlay for text readability - 70% opacity */}
-        <div className="absolute inset-0 bg-black/70" />
+        {/* Dark overlay for text readability - 75% opacity */}
+        <div className="absolute inset-0 bg-black/75" />
       </div>
 
       {/* Content - Vertically and horizontally centered */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-8 text-center max-w-5xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 md:px-8 text-center mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-white"
-          style={{ fontFamily: "var(--font-serif)" }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight"
+          style={{
+            fontFamily: "var(--font-serif)",
+            color: "#FFFFFF",
+            textShadow: "0 2px 8px rgba(0, 0, 0, 0.8)",
+          }}
         >
           Your future is trying to speak to you
         </motion.h1>
@@ -92,7 +96,12 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
-          className="text-lg sm:text-xl md:text-2xl text-white/90 mb-12 max-w-2xl"
+          className="text-lg sm:text-xl md:text-2xl mb-12 max-w-2xl"
+          style={{
+            color: "rgba(255, 255, 255, 0.85)",
+            textShadow: "0 2px 6px rgba(0, 0, 0, 0.7)",
+            padding: ".8em 0",
+          }}
         >
           Clarity. Guidance. Immediate answers
         </motion.p>
@@ -106,9 +115,15 @@ export default function HeroSection({
             variant="default"
             size="lg"
             onClick={onCtaClick}
-            className="bg-white text-black hover:bg-white/90 font-semibold text-lg px-8 py-6 h-auto"
+            className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl"
+            style={{
+              backgroundColor: "#FFFFFF",
+              color: "#000000",
+              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+              padding: ".8em",
+            }}
           >
-            Book a Reading
+            Book a Call
           </Button>
         </motion.div>
       </div>

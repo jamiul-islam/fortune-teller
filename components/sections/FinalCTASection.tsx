@@ -17,7 +17,7 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto"
+          className=" mx-auto"
         >
           <h2
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
@@ -25,14 +25,22 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
           >
             Ready to discover your path?
           </h2>
-          <p className="text-lg sm:text-xl text-primary-foreground/90 mb-10">
+          <p
+            className="text-lg sm:text-xl text-primary-foreground/90 mb-10"
+            style={{ padding: "0.8em 0" }}
+          >
             Book your consultation now and receive immediate guidance
           </p>
           <Button
             variant="outline"
             size="lg"
             onClick={onCtaClick}
-            className="bg-white text-black hover:bg-white/90 border-white font-semibold text-lg px-8 py-6 h-auto"
+            className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl"
+            style={{
+              backgroundColor: "#FFFFFF",
+              color: "#000000",
+              padding: ".8em",
+            }}
           >
             Book a Reading
           </Button>

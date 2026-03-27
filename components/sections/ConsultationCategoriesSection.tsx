@@ -82,6 +82,7 @@ export default function ConsultationCategoriesSection() {
     <SectionWrapper
       ref={sectionRef}
       className="relative flex items-center justify-center py-20 px-4 sm:px-6 md:px-8 bg-muted/30"
+      style={{ padding: " 0 .8em" }}
     >
       <motion.div style={{ opacity }} className="w-full max-w-7xl">
         <motion.h2
@@ -90,12 +91,12 @@ export default function ConsultationCategoriesSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
-          style={{ fontFamily: "var(--font-serif)" }}
+          style={{ fontFamily: "var(--font-serif)", marginBottom: ".8em" }}
         >
           What is your urgent concern today?
         </motion.h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.map((category, index) => {
             const MotionCard = motion(Card);
             return (
@@ -106,6 +107,7 @@ export default function ConsultationCategoriesSection() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="hover:shadow-md transition-shadow duration-200 min-h-[44px]"
+                style={{ padding: ".8em" }}
               >
                 <CardHeader className="pb-4">
                   {/* Icon */}
@@ -122,8 +124,7 @@ export default function ConsultationCategoriesSection() {
                         key={idx}
                         className="text-sm text-muted-foreground flex items-start leading-relaxed"
                       >
-                        <span className="mr-2 mt-1">•</span>
-                        <span>{sub}</span>
+                        <span className="mr-2 mt-1">{sub}</span>
                       </li>
                     ))}
                   </ul>
