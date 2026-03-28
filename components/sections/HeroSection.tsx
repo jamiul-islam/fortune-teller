@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Button } from "@/components/ui/Button";
+import { useTranslations } from "next-intl";
 
 interface HeroSectionProps {
   videoUrl: string;
@@ -16,6 +17,7 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const [videoError, setVideoError] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("hero");
 
   // Extract YouTube video ID from URL
   const getYouTubeEmbedUrl = (url: string) => {
@@ -89,7 +91,7 @@ export default function HeroSection({
             textShadow: "0 2px 8px rgba(0, 0, 0, 0.8)",
           }}
         >
-          Your future is trying to speak to you
+          {t("title")}
         </motion.h1>
 
         <motion.p
@@ -103,7 +105,7 @@ export default function HeroSection({
             padding: ".8em 0",
           }}
         >
-          Clarity. Guidance. Immediate answers
+          {t("subtitle")}
         </motion.p>
 
         <motion.div
@@ -123,7 +125,7 @@ export default function HeroSection({
               padding: ".8em",
             }}
           >
-            Book a Call
+            {t("cta")}
           </Button>
         </motion.div>
       </div>

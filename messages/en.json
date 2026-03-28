@@ -1,0 +1,88 @@
+{
+  "header": {
+    "title": "iTellFortune",
+    "phone": "Call Us"
+  },
+  "hero": {
+    "title": "Your future is trying to speak to you",
+    "subtitle": "Clarity. Guidance. Immediate answers",
+    "cta": "Book a Reading"
+  },
+  "categories": {
+    "title": "What is your urgent concern today?",
+    "love": {
+      "title": "Love & Relationships",
+      "items": [
+        "Love problems",
+        "Couple repair",
+        "Reconciliation",
+        "Soulmate guidance",
+        "Breakups"
+      ]
+    },
+    "career": {
+      "title": "Career & Success",
+      "items": [
+        "Business success",
+        "Career blockage",
+        "Financial opportunities"
+      ]
+    },
+    "health": {
+      "title": "Health & Energy",
+      "items": ["Natural healing", "Energy cleansing", "Emotional balance"]
+    },
+    "treatments": {
+      "title": "Natural Treatments",
+      "items": [
+        "Natural healing for all illnesses",
+        "Energy via natural treatment",
+        "Feminine fertility",
+        "Masculine fertility",
+        "Feminine endurance",
+        "Masculine endurance",
+        "Natural recovery for complex conditions"
+      ]
+    },
+    "destiny": {
+      "title": "Destiny & Spirituality",
+      "items": ["Luck", "Destiny", "Spiritual messages", "Life path"]
+    },
+    "questions": {
+      "title": "Specific Questions",
+      "items": ["Any personal question"]
+    }
+  },
+  "socialProof": {
+    "title": "They found their answers"
+  },
+  "trust": {
+    "title": "A reliable and confidential consultation",
+    "confidentiality": {
+      "title": "Confidentiality",
+      "description": "Your information is completely secure"
+    },
+    "immediate": {
+      "title": "Immediate Response",
+      "description": "Get your answers quickly"
+    },
+    "personalized": {
+      "title": "Personalized Guidance",
+      "description": "Tailored to your unique situation"
+    }
+  },
+  "footer": {
+    "legal": "Legal notice",
+    "privacy": "Privacy policy",
+    "contact": "Contact"
+  },
+  "confirmation": {
+    "title": "Thank you for booking",
+    "yourSolution": "Your Solution",
+    "newConsultation": "New Consultation"
+  },
+  "solution": {
+    "title": "Your Personalized Solution",
+    "bookAgain": "Book Another Reading"
+  }
+}

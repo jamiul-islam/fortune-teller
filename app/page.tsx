@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <main>
-      <HeaderSection appName="iTellFortune" onBookingClick={handleCtaClick} />
+      <HeaderSection />
       <HeroSection
         videoUrl={process.env.NEXT_PUBLIC_HERO_VIDEO_URL || ""}
         onCtaClick={handleCtaClick}

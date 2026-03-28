@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 interface Testimonial {
   id: string;
@@ -37,6 +38,7 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function SocialProofSection() {
+  const t = useTranslations("socialProof");
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -59,7 +61,7 @@ export default function SocialProofSection() {
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
           style={{ fontFamily: "var(--font-serif)", paddingBottom: ".8em" }}
         >
-          They found their answers
+          {t("title")}
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

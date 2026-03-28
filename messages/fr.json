@@ -1,0 +1,92 @@
+{
+  "header": {
+    "title": "iTellFortune",
+    "phone": "Appelez-nous"
+  },
+  "hero": {
+    "title": "Votre avenir essaie de vous parler",
+    "subtitle": "Clarté. Guidance. Réponses immédiates",
+    "cta": "Réserver une Lecture"
+  },
+  "categories": {
+    "title": "Quelle est votre préoccupation urgente aujourd'hui?",
+    "love": {
+      "title": "Amour & Relations",
+      "items": [
+        "Problèmes d'amour",
+        "Réparation de couple",
+        "Réconciliation",
+        "Guidance d'âme sœur",
+        "Ruptures"
+      ]
+    },
+    "career": {
+      "title": "Carrière & Succès",
+      "items": [
+        "Succès commercial",
+        "Blocage de carrière",
+        "Opportunités financières"
+      ]
+    },
+    "health": {
+      "title": "Santé & Énergie",
+      "items": [
+        "Guérison naturelle",
+        "Nettoyage énergétique",
+        "Équilibre émotionnel"
+      ]
+    },
+    "treatments": {
+      "title": "Traitements Naturels",
+      "items": [
+        "Guérison naturelle pour toutes les maladies",
+        "Énergie via traitement naturel",
+        "Fertilité féminine",
+        "Fertilité masculine",
+        "Endurance féminine",
+        "Endurance masculine",
+        "Récupération naturelle pour conditions complexes"
+      ]
+    },
+    "destiny": {
+      "title": "Destin & Spiritualité",
+      "items": ["Chance", "Destin", "Messages spirituels", "Chemin de vie"]
+    },
+    "questions": {
+      "title": "Questions Spécifiques",
+      "items": ["Toute question personnelle"]
+    }
+  },
+  "socialProof": {
+    "title": "Ils ont trouvé leurs réponses"
+  },
+  "trust": {
+    "title": "Une consultation fiable et confidentielle",
+    "confidentiality": {
+      "title": "Confidentialité",
+      "description": "Vos informations sont complètement sécurisées"
+    },
+    "immediate": {
+      "title": "Réponse Immédiate",
+      "description": "Obtenez vos réponses rapidement"
+    },
+    "personalized": {
+      "title": "Guidance Personnalisée",
+      "description": "Adaptée à votre situation unique"
+    }
+  },
+  "footer": {
+    "legal": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "contact": "Contact"
+  },
+  "confirmation": {
+    "title": "Merci pour votre réservation",
+    "yourSolution": "Votre Solution",
+    "newConsultation": "Nouvelle Consultation"
+  },
+  "solution": {
+    "title": "Votre Solution Personnalisée",
+    "bookAgain": "Réserver une Autre Lecture"
+  }
+}

@@ -1,14 +1,28 @@
 {
-  "fortuneNotes": [
-    "Your path is opening. The confusion you feel now is temporary, and clarity is already moving toward you.",
-    "You are protected. The energy around you is shifting in your favor, even if you don't see it yet.",
-    "Your situation is solvable. A breakthrough is forming, and the pressure you feel will soon release.",
-    "Someone is thinking about you more than you realize. A reconnection or understanding is approaching.",
-    "Your future is not blocked — it is reorganizing itself to bring you something better than what you lost.",
-    "Your health and energy will rise again. Your body and spirit are entering a phase of recovery and strength.",
-    "Success is coming. A small decision or change will unlock a much bigger opportunity for you.",
-    "Your heart will heal. What feels heavy today will soon feel lighter, and emotional balance will return.",
-    "You are not alone. A guiding force is watching over you and helping you move toward the right direction.",
-    "Your intuition is waking up. Trust the signs you're receiving — they are leading you exactly where you need to go."
-  ]
+  "fortuneNotes": {
+    "en": [
+      "Your path is opening. The confusion you feel now is temporary, and clarity is already moving toward you.",
+      "You are protected. The energy around you is shifting in your favor, even if you don't see it yet.",
+      "Your situation is solvable. A breakthrough is forming, and the pressure you feel will soon release.",
+      "Someone is thinking about you more than you realize. A reconnection or understanding is approaching.",
+      "Your future is not blocked — it is reorganizing itself to bring you something better than what you lost.",
+      "Your health and energy will rise again. Your body and spirit are entering a phase of recovery and strength.",
+      "Success is coming. A small decision or change will unlock a much bigger opportunity for you.",
+      "Your heart will heal. What feels heavy today will soon feel lighter, and emotional balance will return.",
+      "You are not alone. A guiding force is watching over you and helping you move toward the right direction.",
+      "Your intuition is waking up. Trust the signs you're receiving — they are leading you exactly where you need to go."
+    ],
+    "fr": [
+      "Votre chemin s'ouvre. La confusion que vous ressentez maintenant est temporaire, et la clarté vient déjà vers vous.",
+      "Vous êtes protégé. L'énergie autour de vous change en votre faveur, même si vous ne le voyez pas encore.",
+      "Votre situation est résoluble. Une percée se forme, et la pression que vous ressentez va bientôt se relâcher.",
+      "Quelqu'un pense à vous plus que vous ne le réalisez. Une reconnexion ou une compréhension approche.",
+      "Votre avenir n'est pas bloqué — il se réorganise pour vous apporter quelque chose de mieux que ce que vous avez perdu.",
+      "Votre santé et votre énergie vont remonter. Votre corps et votre esprit entrent dans une phase de récupération et de force.",
+      "Le succès arrive. Une petite décision ou un changement débloquera une opportunité beaucoup plus grande pour vous.",
+      "Votre cœur guérira. Ce qui semble lourd aujourd'hui se sentira bientôt plus léger, et l'équilibre émotionnel reviendra.",
+      "Vous n'êtes pas seul. Une force guide veille sur vous et vous aide à avancer dans la bonne direction.",
+      "Votre intuition se réveille. Faites confiance aux signes que vous recevez — ils vous mènent exactement là où vous devez aller."
+    ]
+  }
 }

@@ -3,24 +3,31 @@ import "./globals.css";
 import FooterSection from "@/components/sections/FooterSection";
 import { Noto_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
-const notoSans = Noto_Sans({subsets:['latin'],variable:'--font-sans'});
+const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "iTellFortune",
   description: "Fortune-telling consultation booking platform",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en" className={cn("font-sans", notoSans.variable)}>
+    <html lang={locale} className={cn("font-sans", notoSans.variable)}>
       <body>
-        {children}
-        <FooterSection />
+        <NextIntlClientProvider messages={messages}>
+          {children}
+          <FooterSection />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
