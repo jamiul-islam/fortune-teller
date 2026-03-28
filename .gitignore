@@ -40,7 +40,6 @@ next-env.d.ts
 *.swp
 *.swo
 .kiro/
-/intern-agent-doc
 
 # OS
 .DS_Store
