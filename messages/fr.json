@@ -87,7 +87,15 @@
   },
   "solution": {
     "title": "Votre Solution Personnalisée",
-    "bookAgain": "Réserver une Autre Lecture"
+    "bookAgain": "Réserver une Autre Lecture",
+    "fortuneNote": "Votre Note de Fortune",
+    "finalMessage": "Faites confiance au voyage à venir. Votre chemin se déroule exactement comme il se doit.",
+    "loading": "Chargement de votre solution personnalisée...",
+    "error": {
+      "title": "Solution Non Disponible",
+      "description": "Nous n'avons pas pu charger votre solution. Le jeton peut être invalide ou expiré.",
+      "expired": "Votre lien de confirmation a peut-être expiré (les jetons sont valides pendant 7 jours) ou la réservation n'a pas pu être trouvée."
+    }
   },
   "finalCta": {
     "title": "Prêt à découvrir votre chemin?",

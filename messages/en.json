@@ -83,7 +83,15 @@
   },
   "solution": {
     "title": "Your Personalized Solution",
-    "bookAgain": "Book Another Reading"
+    "bookAgain": "Book Another Reading",
+    "fortuneNote": "Your Fortune Note",
+    "finalMessage": "Trust the journey ahead. Your path is unfolding exactly as it should.",
+    "loading": "Loading your personalized solution...",
+    "error": {
+      "title": "Solution Not Available",
+      "description": "We couldn't load your solution. The token may be invalid or expired.",
+      "expired": "Your confirmation link may have expired (tokens are valid for 7 days) or the booking could not be found."
+    }
   },
   "finalCta": {
     "title": "Ready to discover your path?",
