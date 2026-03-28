@@ -187,26 +187,11 @@ export default function ConfirmationPage() {
           <div className="absolute inset-0 bg-muted" />
         )}
         {/* Dark overlay for text readability - 75% opacity */}
-        <div className="absolute inset-0 bg-black/75" />
+        <div className="absolute inset-0 bg-black/85" />
       </div>
 
       {/* Content - Vertically and horizontally centered */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 md:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="mb-6"
-        >
-          <IconSparkles
-            className="w-16 h-16 mx-auto mb-6"
-            style={{
-              color: "#ffd700",
-              filter: "drop-shadow(0 2px 8px rgba(255, 215, 0, 0.5))",
-            }}
-          />
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -225,7 +210,7 @@ export default function ConfirmationPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-          className="text-lg sm:text-xl md:text-2xl mb-12 max-w-2xl"
+          className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl"
           style={{
             color: "rgba(255, 255, 255, 0.85)",
             textShadow: "0 2px 6px rgba(0, 0, 0, 0.7)",
@@ -242,31 +227,34 @@ export default function ConfirmationPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
           className="flex flex-col sm:flex-row gap-4 mb-12"
+          style={{ marginBottom: "1em" }}
         >
           <Button
-            onClick={handleYourSolution}
+            variant="default"
             size="lg"
+            onClick={handleYourSolution}
             className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl"
             style={{
-              backgroundColor: "#ffd700",
+              backgroundColor: "#FFFFFF",
               color: "#000000",
-              boxShadow: "0 4px 20px rgba(255, 215, 0, 0.5)",
+              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+              padding: ".8em",
             }}
           >
-            <IconSparkles className="mr-2" />
             {t("confirmation.yourSolution")}
           </Button>
           <Button
             onClick={handleNewConsultation}
-            variant="outline"
+            variant="default"
             size="lg"
             className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl border-2"
             style={{
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              backgroundColor: "rgba(255, 255, 255, 0.08)",
               color: "#FFFFFF",
               borderColor: "rgba(255, 255, 255, 0.3)",
               boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
               backdropFilter: "blur(10px)",
+              padding: "0 0.8em",
             }}
           >
             {t("confirmation.newConsultation")}
@@ -286,7 +274,10 @@ export default function ConfirmationPage() {
               boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
             }}
           >
-            <CardContent className="py-6 space-y-3 text-sm">
+            <CardContent
+              className="py-6 space-y-3 text-sm"
+              style={{ padding: "0.8em" }}
+            >
               <div className="flex justify-between">
                 <span style={{ color: "rgba(255, 255, 255, 0.7)" }}>
                   Email:
