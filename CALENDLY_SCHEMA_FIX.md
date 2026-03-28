@@ -66,9 +66,9 @@ Updated `intern-agent-doc/calendly-stripe-setup.md`:
 
 **No code changes required!** The existing implementation already treats dates as strings:
 
-✅ **Webhook Handler** (`app/api/webhooks/calendly/route.ts`):
+✅ **Polling Endpoint** (`app/api/bookings/poll/route.ts`):
 
-- Already extracts dates as strings from `questions_and_answers`
+- Extracts dates as strings from Calendly API `questions_and_answers`
 - Stores them directly in Supabase without date parsing
 
 ✅ **Confirmation Page** (`app/confirmation/page.tsx`):

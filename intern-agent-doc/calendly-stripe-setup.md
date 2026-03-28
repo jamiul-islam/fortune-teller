@@ -393,21 +393,31 @@ CALENDLY_OAUTH_CLIENT_SECRET=[Client Secret from Step 6.2]
 1. Log in to Calendly
 2. Navigate to **Integrations** → **API & Webhooks**
 3. Click on **"Webhooks"** tab
-4. Click **"Create Webhook"**
+4. ~~Click **"Create Webhook"**~~ **DEPRECATED - Webhooks no longer used**
 
-### Step 7.2: Configure Webhook Endpoint
+### Step 7.2: ~~Configure Webhook Endpoint~~ DEPRECATED
 
-1. Enter webhook details:
-   - **Webhook URL**: `https://fortune-teller-eta.vercel.app/api/webhooks/calendly`
-     - This is your production webhook endpoint on Vercel
-     - For local testing, use ngrok: `https://your-ngrok-url.ngrok.io/api/webhooks/calendly`
-   - **Events to subscribe to**: Select **"invitee.created"**
-     - This event fires when a new booking is confirmed with payment
-2. Click **"Create Webhook"**
+**NOTE**: As of the latest implementation, the app no longer uses Calendly webhooks. Instead, it polls the Calendly API directly when a booking is made. This eliminates the need for:
 
-### Step 7.3: Obtain Webhook Signing Key
+- Webhook configuration in Calendly
+- Webhook signing keys
+- Calendly Standard plan (webhooks require paid plan)
 
-After creating the webhook:
+The app now uses the `CALENDLY_API_PERSONAL_ACCESS_TOKEN` to query Calendly's API directly via the `/api/bookings/poll` endpoint.
+
+~~1. Enter webhook details:
+
+- **Webhook URL**: `https://fortune-teller-eta.vercel.app/api/webhooks/calendly`
+  - This is your production webhook endpoint on Vercel
+  - For local testing, use ngrok: `https://your-ngrok-url.ngrok.io/api/webhooks/calendly`
+- **Events to subscribe to**: Select **"invitee.created"**
+  - This event fires when a new booking is confirmed with payment
+
+2. Click **"Create Webhook"**~~
+
+### Step 7.3: ~~Obtain Webhook Signing Key~~ DEPRECATED
+
+~~After creating the webhook:~~
 
 1. You'll see the webhook listed in the webhooks table
 2. Click on the webhook you just created
