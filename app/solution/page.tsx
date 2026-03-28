@@ -188,7 +188,7 @@ export default function SolutionPage() {
       </div>
 
       <div className="relative z-10 flex items-center justify-center min-h-screen py-20 px-4 sm:px-6 md:px-8">
-        <div className="w-full max-w-7xl">
+        <div className="w-full max-w-5xl">
           {/* Page Title */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -260,42 +260,24 @@ export default function SolutionPage() {
               </Card>
             </motion.div>
 
-            {/* Reassuring Final Message Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <Card
-                className="hover:shadow-md transition-shadow duration-200"
-                style={{ padding: ".8em" }}
-              >
-                <CardHeader className="pb-4">
-                  <div className="text-5xl mb-4">🌟</div>
-                  <CardTitle className="text-xl font-bold">
-                    Your Path Forward
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="text-lg leading-relaxed text-muted-foreground italic">
-                    {t("solution.finalMessage")}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-
             {/* Book Again Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="text-center pt-8"
             >
               <Button
                 onClick={handleBookAgain}
                 variant="outline"
                 size="lg"
-                className="font-semibold"
+                className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl"
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  color: "#000000",
+                  padding: ".8em",
+                  marginTop: ".8em",
+                }}
               >
                 {t("solution.bookAgain")}
               </Button>
