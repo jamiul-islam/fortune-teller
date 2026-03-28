@@ -66,26 +66,28 @@ export function CalendlyInlineEmbed({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
         className="max-w-4xl max-h-[90vh] overflow-hidden p-0"
-        style={{ maxWidth: "70vw" }}
+        style={{ maxWidth: "90vw" }}
       >
         <DialogHeader
-          className="px-6 pt-6 text-center"
+          className="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8 text-center"
           style={{ marginTop: ".8rem" }}
         >
-          <DialogTitle className="text-2xl font-bold">
+          <DialogTitle className="text-xl sm:text-2xl md:text-3xl font-bold">
             Book Your Reading
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-sm sm:text-base md:text-lg">
             Choose your consultation duration and complete your booking
           </DialogDescription>
         </DialogHeader>
 
-        <div className="px-6 pb-6">
+        <div className="px-4 sm:px-6 md:px-8 pb-4 sm:pb-6 md:pb-8">
           {embedError || !calendlyUrl ? (
             <Alert variant="destructive" className="mb-4">
               <IconAlertCircle className="h-4 w-4" />
-              <AlertTitle>Booking System Error</AlertTitle>
-              <AlertDescription>
+              <AlertTitle className="text-sm sm:text-base">
+                Booking System Error
+              </AlertTitle>
+              <AlertDescription className="text-xs sm:text-sm">
                 Unable to load the booking system. Please try again or contact
                 support.
               </AlertDescription>
