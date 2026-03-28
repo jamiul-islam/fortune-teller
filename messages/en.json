@@ -84,5 +84,10 @@
   "solution": {
     "title": "Your Personalized Solution",
     "bookAgain": "Book Another Reading"
+  },
+  "finalCta": {
+    "title": "Ready to discover your path?",
+    "subtitle": "Book your consultation now and receive immediate guidance",
+    "cta": "Book a Reading"
   }
 }

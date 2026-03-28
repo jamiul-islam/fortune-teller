@@ -88,5 +88,10 @@
   "solution": {
     "title": "Votre Solution Personnalisée",
     "bookAgain": "Réserver une Autre Lecture"
+  },
+  "finalCta": {
+    "title": "Prêt à découvrir votre chemin?",
+    "subtitle": "Réservez votre consultation maintenant et recevez des conseils immédiats",
+    "cta": "Réserver une Lecture"
   }
 }
