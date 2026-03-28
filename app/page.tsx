@@ -1,16 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import HeaderSection from "@/components/sections/HeaderSection";
 import HeroSection from "@/components/sections/HeroSection";
 import ConsultationCategoriesSection from "@/components/sections/ConsultationCategoriesSection";
 import SocialProofSection from "@/components/sections/SocialProofSection";
 import TrustSection from "@/components/sections/TrustSection";
 import FinalCTASection from "@/components/sections/FinalCTASection";
+import { CalendlyInlineEmbed } from "@/components/booking/CalendlyInlineEmbed";
 
 export default function Home() {
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+
   const handleCtaClick = () => {
-    // TODO: Implement Calendly inline embed modal/section
-    console.log("CTA clicked - Book a Reading");
+    setIsCalendlyOpen(true);
+  };
+
+  const handleCloseCalendly = () => {
+    setIsCalendlyOpen(false);
   };
 
   return (
@@ -24,6 +31,11 @@ export default function Home() {
       <SocialProofSection />
       <TrustSection />
       <FinalCTASection onCtaClick={handleCtaClick} />
+
+      <CalendlyInlineEmbed
+        isOpen={isCalendlyOpen}
+        onClose={handleCloseCalendly}
+      />
     </main>
   );
 }
