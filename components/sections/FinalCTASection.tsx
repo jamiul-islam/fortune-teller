@@ -3,12 +3,15 @@
 import { motion } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Button } from "@/components/ui/Button";
+import { useTranslations } from "next-intl";
 
 interface FinalCTASectionProps {
   onCtaClick: () => void;
 }
 
 export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
+  const t = useTranslations("finalCta");
+
   return (
     <SectionWrapper className="flex items-center justify-center bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center py-20">
@@ -23,13 +26,13 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
             style={{ fontFamily: "var(--font-serif)" }}
           >
-            Ready to discover your path?
+            {t("title")}
           </h2>
           <p
             className="text-lg sm:text-xl text-primary-foreground/90 mb-10"
             style={{ padding: "0.8em 0" }}
           >
-            Book your consultation now and receive immediate guidance
+            {t("subtitle")}
           </p>
           <Button
             variant="outline"
@@ -42,7 +45,7 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
               padding: ".8em",
             }}
           >
-            Book a Reading
+            {t("cta")}
           </Button>
         </motion.div>
       </div>

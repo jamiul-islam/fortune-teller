@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import Particles from "../ui/Particles";
+import { useTranslations } from "next-intl";
 
 interface Category {
   id: string;
@@ -13,64 +14,8 @@ interface Category {
   icon: string;
 }
 
-const categories: Category[] = [
-  {
-    id: "love",
-    title: "Love & Relationships",
-    icon: "💕",
-    subcategories: [
-      "Love problems",
-      "Couple repair",
-      "Reconciliation",
-      "Soulmate guidance",
-      "Breakups",
-    ],
-  },
-  {
-    id: "career",
-    title: "Career & Success",
-    icon: "✨",
-    subcategories: [
-      "Business success",
-      "Career blockage",
-      "Financial opportunities",
-    ],
-  },
-  {
-    id: "health",
-    title: "Health & Energy",
-    icon: "🌿",
-    subcategories: ["Natural healing", "Energy cleansing", "Emotional balance"],
-  },
-  {
-    id: "natural",
-    title: "Natural Treatments",
-    icon: "🔮",
-    subcategories: [
-      "Natural healing for all illnesses",
-      "Energy via natural treatment",
-      "Feminine fertility",
-      "Masculine fertility",
-      "Feminine endurance",
-      "Masculine endurance",
-      "Natural recovery for complex conditions",
-    ],
-  },
-  {
-    id: "destiny",
-    title: "Destiny & Spirituality",
-    icon: "⭐",
-    subcategories: ["Luck", "Destiny", "Spiritual messages", "Life path"],
-  },
-  {
-    id: "specific",
-    title: "Specific Questions",
-    icon: "💫",
-    subcategories: ["Any personal question"],
-  },
-];
-
 export default function ConsultationCategoriesSection() {
+  const t = useTranslations("categories");
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -78,6 +23,45 @@ export default function ConsultationCategoriesSection() {
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  const categories: Category[] = [
+    {
+      id: "love",
+      title: t("love.title"),
+      icon: "💕",
+      subcategories: t.raw("love.items") as string[],
+    },
+    {
+      id: "career",
+      title: t("career.title"),
+      icon: "✨",
+      subcategories: t.raw("career.items") as string[],
+    },
+    {
+      id: "health",
+      title: t("health.title"),
+      icon: "🌿",
+      subcategories: t.raw("health.items") as string[],
+    },
+    {
+      id: "natural",
+      title: t("treatments.title"),
+      icon: "🔮",
+      subcategories: t.raw("treatments.items") as string[],
+    },
+    {
+      id: "destiny",
+      title: t("destiny.title"),
+      icon: "⭐",
+      subcategories: t.raw("destiny.items") as string[],
+    },
+    {
+      id: "specific",
+      title: t("questions.title"),
+      icon: "💫",
+      subcategories: t.raw("questions.items") as string[],
+    },
+  ];
 
   return (
     <SectionWrapper
@@ -113,7 +97,7 @@ export default function ConsultationCategoriesSection() {
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
           style={{ fontFamily: "var(--font-serif)", marginBottom: ".8em" }}
         >
-          What is your urgent concern today?
+          {t("title")}
         </motion.h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

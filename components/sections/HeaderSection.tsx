@@ -3,16 +3,15 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Phone } from "lucide-react";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { useTranslations } from "next-intl";
 
 interface HeaderSectionProps {
-  appName: string;
   onBookingClick: () => void;
 }
 
-export default function HeaderSection({
-  appName,
-  onBookingClick,
-}: HeaderSectionProps) {
+export default function HeaderSection({ onBookingClick }: HeaderSectionProps) {
+  const t = useTranslations("header");
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -50,27 +49,40 @@ export default function HeaderSection({
             color: isScrolled ? "#000000" : "#FFFFFF",
           }}
         >
-          {appName}
+          {t("title")}
         </div>
 
-        {/* Booking Button */}
-        <button
-          onClick={onBookingClick}
-          className="flex items-center justify-center w-10 h-10 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105"
-          aria-label="Book a call"
-          style={{
-            background: isScrolled
-              ? "rgba(0, 0, 0, 0.1)"
-              : "rgba(255, 255, 255, 0.2)",
-          }}
-        >
-          <Phone
-            className="w-5 h-5 transition-colors duration-300"
+        {/* Right side: Language Toggle + Booking Button */}
+        <div className="flex items-center gap-2">
+          {/* Language Toggle */}
+          <div
+            className="transition-colors duration-300"
             style={{
               color: isScrolled ? "#000000" : "#FFFFFF",
             }}
-          />
-        </button>
+          >
+            <LanguageToggle />
+          </div>
+
+          {/* Booking Button */}
+          <button
+            onClick={onBookingClick}
+            className="flex items-center justify-center w-10 h-10 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105"
+            aria-label={t("phone")}
+            style={{
+              background: isScrolled
+                ? "rgba(0, 0, 0, 0.1)"
+                : "rgba(255, 255, 255, 0.2)",
+            }}
+          >
+            <Phone
+              className="w-5 h-5 transition-colors duration-300"
+              style={{
+                color: isScrolled ? "#000000" : "#FFFFFF",
+              }}
+            />
+          </button>
+        </div>
       </div>
     </motion.header>
   );

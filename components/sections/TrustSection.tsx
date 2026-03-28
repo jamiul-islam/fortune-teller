@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 interface TrustIndicator {
   id: string;
@@ -11,31 +12,29 @@ interface TrustIndicator {
   description: string;
 }
 
-const trustIndicators: TrustIndicator[] = [
-  {
-    id: "confidentiality",
-    icon: "🔒",
-    title: "Confidentiality",
-    description:
-      "Your personal information and consultation details remain completely private and secure",
-  },
-  {
-    id: "immediate-response",
-    icon: "⚡",
-    title: "Immediate Response",
-    description:
-      "Receive instant confirmation and expect a callback within minutes of booking",
-  },
-  {
-    id: "personalized-guidance",
-    icon: "✨",
-    title: "Personalized Guidance",
-    description:
-      "Every reading is tailored specifically to your unique situation and concerns",
-  },
-];
-
 export default function TrustSection() {
+  const t = useTranslations("trust");
+
+  const trustIndicators: TrustIndicator[] = [
+    {
+      id: "confidentiality",
+      icon: "🔒",
+      title: t("confidentiality.title"),
+      description: t("confidentiality.description"),
+    },
+    {
+      id: "immediate-response",
+      icon: "⚡",
+      title: t("immediate.title"),
+      description: t("immediate.description"),
+    },
+    {
+      id: "personalized-guidance",
+      icon: "✨",
+      title: t("personalized.title"),
+      description: t("personalized.description"),
+    },
+  ];
   return (
     <SectionWrapper className="flex items-center justify-center bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 py-20">
@@ -47,7 +46,7 @@ export default function TrustSection() {
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
           style={{ fontFamily: "var(--font-serif)", paddingBottom: ".8em" }}
         >
-          A reliable and confidential consultation
+          {t("title")}
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">

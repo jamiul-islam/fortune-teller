@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface FooterLink {
   id: string;
@@ -7,25 +10,26 @@ interface FooterLink {
   href: string;
 }
 
-const footerLinks: FooterLink[] = [
-  {
-    id: "legal",
-    label: "Legal notice",
-    href: "/legal",
-  },
-  {
-    id: "privacy",
-    label: "Privacy policy",
-    href: "/privacy",
-  },
-  {
-    id: "contact",
-    label: "Contact",
-    href: "/contact",
-  },
-];
-
 export default function FooterSection() {
+  const t = useTranslations("footer");
+
+  const footerLinks: FooterLink[] = [
+    {
+      id: "legal",
+      label: t("legal"),
+      href: "/legal",
+    },
+    {
+      id: "privacy",
+      label: t("privacy"),
+      href: "/privacy",
+    },
+    {
+      id: "contact",
+      label: t("contact"),
+      href: "/contact",
+    },
+  ];
   return (
     <footer className="w-full bg-near-black text-off-white py-6 sm:py-7 md:py-8">
       <div className="container mx-auto px-4 sm:px-6 md:px-8">
