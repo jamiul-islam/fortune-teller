@@ -45,10 +45,67 @@ export function CalendlyInlineEmbed({
 
   // Listen for Calendly event_scheduled postMessage
   useCalendlyEventListener({
-    onEventScheduled: (e) => {
+    onEventScheduled: async (e) => {
       console.log("Event scheduled:", e.data.payload);
-      // Redirect to confirmation page with pending token
-      router.push("/confirmation?token=pending");
+
+      // Extract Calendly event URI
+      const eventUri = e.data.payload?.event?.uri;
+
+      if (!eventUri) {
+        console.error("No event URI found in Calendly payload");
+        router.push("/confirmation?token=error");
+        return;
+      }
+
+      // Implement polling mechanism
+      const maxAttempts = 30; // 30 seconds timeout (30 attempts * 1 second)
+      let attempts = 0;
+
+      const pollForBooking = async (): Promise<void> => {
+        try {
+          attempts++;
+
+          // Call polling endpoint
+          const response = await fetch(
+            `/api/bookings/poll?event_uri=${encodeURIComponent(eventUri)}`,
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+
+            if (data.success && data.confirmationToken) {
+              // Booking found, redirect with real token
+              router.push(`/confirmation?token=${data.confirmationToken}`);
+              return;
+            }
+          }
+
+          // If booking not found yet and haven't reached timeout
+          if (attempts < maxAttempts) {
+            // Wait 1 second before next poll
+            setTimeout(() => pollForBooking(), 1000);
+          } else {
+            // Timeout reached, redirect to error page
+            console.error(
+              "Polling timeout: booking not created within 30 seconds",
+            );
+            router.push("/confirmation?token=timeout");
+          }
+        } catch (error) {
+          console.error("Polling error:", error);
+
+          // Retry if haven't reached timeout
+          if (attempts < maxAttempts) {
+            setTimeout(() => pollForBooking(), 1000);
+          } else {
+            // Timeout reached, redirect to error page
+            router.push("/confirmation?token=error");
+          }
+        }
+      };
+
+      // Start polling
+      pollForBooking();
     },
   });
 

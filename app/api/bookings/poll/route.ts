@@ -1,54 +1,52 @@
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
 import { supabaseAdmin } from "@/lib/supabase";
+import crypto from "crypto";
 
-// Interface for Calendly webhook payload
-interface CalendlyWebhookPayload {
-  event: string;
-  payload: {
-    event_uri: string;
-    invitee: {
-      uri: string;
-      email: string;
-      name: string;
-      first_name?: string;
-      last_name?: string;
-      created_at: string;
-      questions_and_answers?: Array<{
-        question: string;
-        answer: string;
-        position: number;
-      }>;
+// Interface for Calendly scheduled event response
+interface CalendlyScheduledEvent {
+  resource: {
+    uri: string;
+    name: string;
+    status: string;
+    start_time: string;
+    end_time: string;
+    event_type: string;
+    location: {
+      type: string;
+      location?: string;
     };
-    event: {
-      uri: string;
-      name: string;
-      start_time: string;
-      end_time: string;
+    invitees_counter: {
+      total: number;
+      active: number;
+      limit: number;
     };
+    created_at: string;
+    updated_at: string;
   };
 }
 
-// Helper function to verify webhook signature
-function verifyWebhookSignature(
-  payload: string,
-  signature: string,
-  signingKey: string,
-): boolean {
-  try {
-    const hmac = crypto.createHmac("sha256", signingKey);
-    const digest = hmac.update(payload, "utf8").digest("hex");
-    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(digest));
-  } catch (error) {
-    console.error("Error verifying webhook signature:", error);
-    return false;
-  }
+// Interface for Calendly invitee response
+interface CalendlyInvitee {
+  resource: {
+    uri: string;
+    email: string;
+    name: string;
+    first_name?: string;
+    last_name?: string;
+    status: string;
+    questions_and_answers?: Array<{
+      question: string;
+      answer: string;
+      position: number;
+    }>;
+    timezone: string;
+    created_at: string;
+    updated_at: string;
+  };
 }
 
 // Helper function to extract booking fields from questions_and_answers
-function extractBookingFields(
-  invitee: CalendlyWebhookPayload["payload"]["invitee"],
-) {
+function extractBookingFields(invitee: CalendlyInvitee["resource"]) {
   const fields = {
     firstName: invitee.first_name || invitee.name.split(" ")[0] || "",
     lastName:
@@ -108,81 +106,115 @@ function calculateDuration(startTime: string, endTime: string): number {
   return 60;
 }
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    // Get the raw body for signature verification
-    const rawBody = await request.text();
-    const signature = request.headers.get("calendly-webhook-signature");
+    // Extract event_uri from query parameters
+    const searchParams = request.nextUrl.searchParams;
+    const eventUri = searchParams.get("event_uri");
 
-    // Verify signature
-    const signingKey = process.env.CALENDLY_WEBHOOK_SIGNING_KEY;
-    if (!signingKey) {
-      console.error("CALENDLY_WEBHOOK_SIGNING_KEY not configured");
+    // Validate event_uri parameter
+    if (!eventUri) {
+      return NextResponse.json(
+        { success: false, message: "Missing event_uri parameter" },
+        { status: 400 },
+      );
+    }
+
+    // Check if booking already exists in Supabase (idempotency)
+    const { data: existingBooking } = await supabaseAdmin
+      .from("bookings")
+      .select("confirmation_token")
+      .eq("calendly_event_uri", eventUri)
+      .single();
+
+    if (existingBooking) {
+      // Booking already created, return existing token
+      return NextResponse.json({
+        success: true,
+        confirmationToken: existingBooking.confirmation_token,
+      });
+    }
+
+    // Fetch event from Calendly API
+    const calendlyToken = process.env.CALENDLY_API_PERSONAL_ACCESS_TOKEN;
+    if (!calendlyToken) {
+      console.error("CALENDLY_API_PERSONAL_ACCESS_TOKEN not configured");
       return NextResponse.json(
         { success: false, message: "Server configuration error" },
         { status: 500 },
       );
     }
 
-    if (!signature) {
-      console.error("Missing webhook signature");
+    const eventResponse = await fetch(eventUri, {
+      headers: {
+        Authorization: `Bearer ${calendlyToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!eventResponse.ok) {
+      // Event not found yet in Calendly
       return NextResponse.json(
-        { success: false, message: "Missing signature" },
-        { status: 401 },
+        { success: false, message: "Event not found in Calendly" },
+        { status: 404 },
       );
     }
 
-    const isValid = verifyWebhookSignature(rawBody, signature, signingKey);
-    if (!isValid) {
-      console.error(
-        "Invalid webhook signature - potential security violation",
-        {
-          receivedSignature: signature,
-          timestamp: new Date().toISOString(),
-        },
-      );
+    const eventData: CalendlyScheduledEvent = await eventResponse.json();
+
+    // Fetch invitees for this event
+    const inviteesResponse = await fetch(`${eventUri}/invitees`, {
+      headers: {
+        Authorization: `Bearer ${calendlyToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!inviteesResponse.ok) {
       return NextResponse.json(
-        { success: false, message: "Invalid signature" },
-        { status: 401 },
+        { success: false, message: "Failed to fetch invitees" },
+        { status: 404 },
       );
     }
 
-    // Parse the payload
-    const webhookPayload: CalendlyWebhookPayload = JSON.parse(rawBody);
+    const inviteesData = await inviteesResponse.json();
+    const invitees = inviteesData.collection;
 
-    // Only process invitee.created events
-    if (webhookPayload.event !== "invitee.created") {
-      return NextResponse.json({
-        success: true,
-        message: "Event type not processed",
-      });
+    if (!invitees || invitees.length === 0) {
+      return NextResponse.json(
+        { success: false, message: "No invitees found" },
+        { status: 404 },
+      );
     }
 
-    const { invitee, event: eventData, event_uri } = webhookPayload.payload;
+    // Get the first invitee (should only be one for single-person bookings)
+    const inviteeUri = invitees[0].uri;
 
-    // Check for duplicate webhook (idempotency)
-    const { data: existingBooking } = await supabaseAdmin
-      .from("bookings")
-      .select("id, confirmation_token")
-      .eq("calendly_event_uri", event_uri)
-      .single();
+    // Fetch full invitee details
+    const inviteeResponse = await fetch(inviteeUri, {
+      headers: {
+        Authorization: `Bearer ${calendlyToken}`,
+        "Content-Type": "application/json",
+      },
+    });
 
-    if (existingBooking) {
-      console.log("Duplicate webhook received for event:", event_uri);
-      return NextResponse.json({
-        success: true,
-        message: "Booking already processed",
-        confirmationToken: existingBooking.confirmation_token,
-      });
+    if (!inviteeResponse.ok) {
+      return NextResponse.json(
+        { success: false, message: "Failed to fetch invitee details" },
+        { status: 404 },
+      );
     }
+
+    const inviteeData: CalendlyInvitee = await inviteeResponse.json();
+    const invitee = inviteeData.resource;
 
     // Extract booking fields
     const bookingFields = extractBookingFields(invitee);
 
     // Calculate duration
     const duration = calculateDuration(
-      eventData.start_time,
-      eventData.end_time,
+      eventData.resource.start_time,
+      eventData.resource.end_time,
     );
 
     // Generate confirmation token
@@ -200,7 +232,7 @@ export async function POST(request: NextRequest) {
       .from("bookings")
       .insert({
         confirmation_token: confirmationToken,
-        calendly_event_uri: event_uri,
+        calendly_event_uri: eventUri,
         first_name: bookingFields.firstName,
         last_name: bookingFields.lastName,
         email: bookingFields.email,
@@ -224,19 +256,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("Booking stored successfully:", {
+    console.log("Booking created from Calendly API:", {
       bookingId: booking.id,
       email: booking.email,
       confirmationToken,
     });
 
+    // Return confirmation token
     return NextResponse.json({
       success: true,
-      message: "Booking processed successfully",
-      confirmationToken,
+      confirmationToken: booking.confirmation_token,
     });
   } catch (error) {
-    console.error("Error processing webhook:", error);
+    console.error("Error in polling endpoint:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
       { status: 500 },
