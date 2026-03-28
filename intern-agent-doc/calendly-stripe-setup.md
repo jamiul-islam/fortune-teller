@@ -208,10 +208,12 @@ For each event type (15min, 30min, 60min), follow these steps:
 2. Select **"Custom Question"**
 3. Configure the question:
    - **Question**: "What is your date of birth?"
-   - **Type**: Date
+   - **Type**: One Line
    - **Required**: Toggle to **ON**
-   - **Help text**: "Required for personalized fortune reading"
+   - **Help text**: "Required for personalized fortune reading (format: YYYY-MM-DD or DD/MM/YYYY)"
 4. Click **"Add Question"**
+
+**Note**: Calendly doesn't have a dedicated date picker for custom questions, so dates will be entered as text. Instruct users to enter dates in a consistent format.
 
 ### Step 4.3: Add Phone Number Field (Required)
 
@@ -251,10 +253,12 @@ For each event type (15min, 30min, 60min), follow these steps:
 2. Select **"Custom Question"**
 3. Configure the question:
    - **Question**: "Mother's date of birth (optional)"
-   - **Type**: Date
+   - **Type**: One Line
    - **Required**: Toggle to **OFF**
-   - **Help text**: "Optional - helps provide deeper insights"
+   - **Help text**: "Optional - helps provide deeper insights (format: YYYY-MM-DD or DD/MM/YYYY)"
 4. Click **"Add Question"**
+
+**Note**: Like the main date of birth field, this will be entered as text since Calendly custom questions don't support date pickers.
 
 ### Step 4.7: Save Configuration
 

@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "name": "Security Scan on File Edit",
+  "description": "Reviews changed files for potential security issues including hardcoded API keys, tokens, credentials, passwords, private keys, internal URLs, and database connection strings. Highlights risks and suggests secure alternatives.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.json",
+      "**/*.env*",
+      "**/*.yaml",
+      "**/*.yml"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the recently edited file for potential security issues:\n1. Look for API keys, tokens, or credentials hardcoded in source code\n2. Check for private keys or sensitive credentials\n3. Scan for encryption keys or certificates\n4. Identify authentication tokens or session IDs\n5. Flag passwords or secrets in configuration files\n6. Detect IP addresses containing sensitive data\n7. Find hardcoded internal URLs\n8. Spot database connection credentials\n\nFor each issue found:\n1. Highlight the specific security risk\n2. Suggest a secure alternative approach (e.g., environment variables, secret managers)\n3. Recommend security best practices\n\nIf no issues are found, confirm the file looks clean."
+  },
+  "workspaceFolderName": "fortune_telling",
+  "shortName": "security-scan-on-edit"
+}
