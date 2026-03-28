@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { Phone } from "lucide-react";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 interface HeaderSectionProps {
   onBookingClick: () => void;
@@ -49,7 +50,7 @@ export default function HeaderSection({ onBookingClick }: HeaderSectionProps) {
             color: isScrolled ? "#000000" : "#FFFFFF",
           }}
         >
-          {t("title")}
+          <Link href={"/"}>{t("title")}</Link>
         </div>
 
         {/* Right side: Language Toggle + Booking Button */}

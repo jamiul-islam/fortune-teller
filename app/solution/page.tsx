@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { IconAlertCircle, IconSparkles, IconHome } from "@tabler/icons-react";
+import { IconAlertCircle, IconHome } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
+import HeaderSection from "@/components/sections/HeaderSection";
+import Particles from "@/components/ui/Particles";
 
 interface BookingDetails {
   firstName: string;
@@ -77,121 +80,209 @@ export default function SolutionPage() {
     router.push("/");
   };
 
+  const handleBookingClick = () => {
+    router.push("/");
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-cosmic-purple-900 via-cosmic-purple-800 to-deep-space">
-        <Card className="w-full max-w-md mx-4">
-          <CardContent className="py-12 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-mystic-gold mx-auto mb-4"></div>
-            <p className="text-muted-foreground">{t("solution.loading")}</p>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen relative bg-background">
+        <HeaderSection onBookingClick={handleBookingClick} />
+
+        {/* Subtle Particle Background */}
+        <div className="absolute inset-0 z-0 opacity-30">
+          <Particles
+            particleColors={["#737373"]}
+            particleCount={200}
+            particleSpread={15}
+            speed={0.05}
+            particleBaseSize={80}
+            moveParticlesOnHover={false}
+            alphaParticles
+            disableRotation={false}
+            pixelRatio={1}
+          />
+        </div>
+
+        <div className="relative z-10 flex items-center justify-center min-h-screen">
+          <Card className="w-full max-w-md mx-4">
+            <CardContent className="py-12 text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+              <p className="text-muted-foreground">{t("solution.loading")}</p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
 
   if (error || !booking) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-cosmic-purple-900 via-cosmic-purple-800 to-deep-space p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <Alert variant="destructive">
-              <IconAlertCircle />
-              <AlertTitle>{t("solution.error.title")}</AlertTitle>
-              <AlertDescription>
-                {error || t("solution.error.description")}
-              </AlertDescription>
-            </Alert>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-6">
-              {t("solution.error.expired")}
-            </p>
-            <Button onClick={handleBookAgain} className="w-full">
-              <IconHome className="mr-2" />
-              {t("confirmation.newConsultation")}
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen relative bg-background">
+        <HeaderSection onBookingClick={handleBookingClick} />
+
+        {/* Subtle Particle Background */}
+        <div className="absolute inset-0 z-0 opacity-30">
+          <Particles
+            particleColors={["#737373"]}
+            particleCount={200}
+            particleSpread={15}
+            speed={0.05}
+            particleBaseSize={80}
+            moveParticlesOnHover={false}
+            alphaParticles
+            disableRotation={false}
+            pixelRatio={1}
+          />
+        </div>
+
+        <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Card className="w-full max-w-md">
+              <CardHeader>
+                <Alert variant="destructive">
+                  <IconAlertCircle />
+                  <AlertTitle>{t("solution.error.title")}</AlertTitle>
+                  <AlertDescription>
+                    {error || t("solution.error.description")}
+                  </AlertDescription>
+                </Alert>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-6">
+                  {t("solution.error.expired")}
+                </p>
+                <Button onClick={handleBookAgain} className="w-full">
+                  <IconHome className="mr-2" />
+                  {t("confirmation.newConsultation")}
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-cosmic-purple-900 via-cosmic-purple-800 to-deep-space py-12 px-4">
-      <div className="max-w-4xl mx-auto space-y-8">
-        {/* Page Title */}
-        <Card className="text-center">
-          <CardHeader>
-            <IconSparkles className="w-12 h-12 mx-auto mb-4 text-mystic-gold" />
-            <CardTitle className="text-2xl md:text-3xl">
-              {t("solution.title")}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">
-              Hello {booking.firstName}, here is your personalized guidance.
-            </p>
-          </CardContent>
-        </Card>
+    <div className="min-h-screen relative bg-primary text-primary-foreground">
+      <HeaderSection onBookingClick={handleBookingClick} />
 
-        {/* Personalized Video (if available) */}
-        {booking.personalizedVideoUrl && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Your Personal Message</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <div
-                className="relative w-full"
-                style={{ paddingBottom: "56.25%" }}
-              >
-                <iframe
-                  src={booking.personalizedVideoUrl}
-                  title="Personalized Video"
-                  className="absolute top-0 left-0 w-full h-full rounded-lg"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </CardContent>
-          </Card>
-        )}
+      {/* Particles Background - White particles on primary background */}
+      <div className="absolute inset-0 z-0">
+        <Particles
+          particleColors={["#ffffff"]}
+          particleCount={500}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover
+          alphaParticles
+          disableRotation={false}
+          pixelRatio={1}
+        />
+      </div>
 
-        {/* Fortune Note Card */}
-        <Card className="border-mystic-gold/20 bg-gradient-to-br from-cosmic-purple-800/50 to-cosmic-purple-900/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-mystic-gold">
-              <IconSparkles className="w-6 h-6" />
-              {t("solution.fortuneNote")}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-lg leading-relaxed text-pearl-white">
-              {fortuneNote}
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Reassuring Final Message */}
-        <Card className="text-center">
-          <CardContent className="py-8">
-            <p className="text-lg text-muted-foreground italic">
-              {t("solution.finalMessage")}
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Discreet Book Again Link */}
-        <div className="text-center">
-          <Button
-            onClick={handleBookAgain}
-            variant="ghost"
-            size="sm"
-            className="text-muted-foreground hover:text-mystic-gold"
+      <div className="relative z-10 flex items-center justify-center min-h-screen py-20 px-4 sm:px-6 md:px-8">
+        <div className="w-full max-w-5xl">
+          {/* Page Title */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 text-primary-foreground"
+            style={{ fontFamily: "var(--font-serif)", marginBottom: ".8em" }}
           >
-            {t("solution.bookAgain")}
-          </Button>
+            {t("solution.title")}
+          </motion.h2>
+
+          <div className="space-y-6">
+            {/* Personalized Video Card (if available) */}
+            {booking.personalizedVideoUrl && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0 }}
+              >
+                <Card
+                  className="hover:shadow-md transition-shadow duration-200"
+                  style={{ padding: ".8em" }}
+                >
+                  <CardHeader className="pb-4">
+                    <div className="text-5xl mb-4">🎥</div>
+                    <CardTitle className="text-xl font-bold">
+                      Your Personal Message
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div
+                      className="relative w-full rounded-lg overflow-hidden"
+                      style={{ paddingBottom: "56.25%" }}
+                    >
+                      <iframe
+                        src={booking.personalizedVideoUrl}
+                        title="Personalized Video"
+                        className="absolute top-0 left-0 w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
+
+            {/* Fortune Note Card - Wide Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <Card
+                className="hover:shadow-md transition-shadow duration-200"
+                style={{ padding: ".8em" }}
+              >
+                <CardHeader className="pb-4">
+                  <div className="text-5xl mb-4">✨</div>
+                  <CardTitle className="text-xl font-bold">
+                    {t("solution.fortuneNote")}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-lg leading-relaxed text-foreground">
+                    {fortuneNote}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Book Again Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-center pt-8"
+            >
+              <Button
+                onClick={handleBookAgain}
+                variant="outline"
+                size="lg"
+                className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl"
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  color: "#000000",
+                  padding: ".8em",
+                  marginTop: ".8em",
+                }}
+              >
+                {t("solution.bookAgain")}
+              </Button>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
