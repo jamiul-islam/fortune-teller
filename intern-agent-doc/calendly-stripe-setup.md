@@ -330,8 +330,8 @@ For each event type (15min, 30min, 60min), follow these steps:
 5. Fill in the application details:
    - **Application Name**: "iTellFortune NextJS App"
    - **Description**: "Fortune-telling consultation booking platform"
-   - **Redirect URI**: `https://your-domain.com/api/auth/calendly/callback` (update with your actual domain)
-   - **Application Website**: `https://your-domain.com`
+   - **Redirect URI**: `https://fortune-teller-eta.vercel.app/api/auth/calendly/callback`
+   - **Application Website**: `https://fortune-teller-eta.vercel.app`
 6. Click **"Create Application"**
 
 ### Step 6.2: Obtain OAuth Credentials
@@ -394,8 +394,8 @@ CALENDLY_OAUTH_CLIENT_SECRET=[Client Secret from Step 6.2]
 ### Step 7.2: Configure Webhook Endpoint
 
 1. Enter webhook details:
-   - **Webhook URL**: `https://your-domain.com/api/webhooks/calendly`
-     - Replace `your-domain.com` with your actual Vercel deployment URL
+   - **Webhook URL**: `https://fortune-teller-eta.vercel.app/api/webhooks/calendly`
+     - This is your production webhook endpoint on Vercel
      - For local testing, use ngrok: `https://your-ngrok-url.ngrok.io/api/webhooks/calendly`
    - **Events to subscribe to**: Select **"invitee.created"**
      - This event fires when a new booking is confirmed with payment
@@ -531,18 +531,59 @@ import { InlineWidget } from "react-calendly";
 2. Scroll to **"After Event"** section
 3. Configure redirect settings:
    - **Redirect to external site**: Toggle to **ON**
-   - **Redirect URL**: `https://your-domain.com/confirmation?token=pending`
-     - The NextJS webhook will update this with the actual token
+   - **Redirect URL**: `https://fortune-teller-eta.vercel.app/confirmation?token=pending`
+     - The NextJS webhook will update this with the actual token after processing
 4. Click **"Save & Close"**
+5. **IMPORTANT**: Repeat this configuration for all three event types (15min, 30min, 60min)
 
 ### Step 8.6: Test Inline Embed
 
-1. Deploy your NextJS application to Vercel
-2. Navigate to the landing page
-3. Click "Book a Reading" button
-4. Verify the Calendly inline embed loads correctly
-5. Complete a test booking (use Stripe test mode)
-6. Verify you're redirected to the confirmation page after payment
+1. Navigate to your deployed application: [https://fortune-teller-eta.vercel.app](https://fortune-teller-eta.vercel.app)
+2. Click "Book a Reading" button on the landing page
+3. Verify the Calendly inline embed loads correctly
+4. Complete a test booking (use Stripe test mode):
+   - Use test card: `4242 4242 4242 4242`
+   - Any future expiration date
+   - Any 3-digit CVV
+5. After payment, verify you're redirected to: `https://fortune-teller-eta.vercel.app/confirmation?token=pending`
+6. Check that the webhook was received by viewing Vercel logs or Calendly webhook delivery logs
+
+---
+
+## Quick Reference: Where to Use Your Vercel URL
+
+Your application is deployed at: **https://fortune-teller-eta.vercel.app**
+
+Here's a quick checklist of everywhere you need to configure this URL:
+
+### 1. Calendly OAuth App (Step 6.1)
+
+- **Location**: Calendly → Integrations → API & Webhooks → OAuth
+- **Redirect URI**: `https://fortune-teller-eta.vercel.app/api/auth/calendly/callback`
+- **Application Website**: `https://fortune-teller-eta.vercel.app`
+
+### 2. Calendly Webhook (Step 7.2)
+
+- **Location**: Calendly → Integrations → API & Webhooks → Webhooks
+- **Webhook URL**: `https://fortune-teller-eta.vercel.app/api/webhooks/calendly`
+
+### 3. Calendly Event Type Redirect (Step 8.5)
+
+- **Location**: Calendly → Event Types → [Each Event] → After Event
+- **Redirect URL**: `https://fortune-teller-eta.vercel.app/confirmation?token=pending`
+- **Apply to**: All three event types (15min, 30min, 60min)
+
+### 4. Environment Variables (Vercel Dashboard)
+
+- **Location**: Vercel Dashboard → fortune-teller-eta → Settings → Environment Variables
+- **Variable**: `NEXT_PUBLIC_BASE_URL`
+- **Value**: `https://fortune-teller-eta.vercel.app`
+
+### 5. Environment Variables (Local .env.local)
+
+- **Location**: Project root → `.env.local` file
+- **Variable**: `NEXT_PUBLIC_BASE_URL`
+- **Value**: `https://fortune-teller-eta.vercel.app`
 
 ---
 
@@ -564,13 +605,22 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
 # Application Configuration
-NEXT_PUBLIC_BASE_URL=https://your-domain.com
+NEXT_PUBLIC_BASE_URL=https://fortune-teller-eta.vercel.app
 TOKEN_EXPIRATION_DAYS=7
 
 # Video URLs
 NEXT_PUBLIC_HERO_VIDEO_URL=youtube_unlisted_link_1
 NEXT_PUBLIC_WELCOME_VIDEO_URL=youtube_unlisted_link_2
 ```
+
+**IMPORTANT**: These environment variables must also be configured in Vercel:
+
+1. Go to [https://vercel.com/dashboard](https://vercel.com/dashboard)
+2. Select your project: **fortune-teller-eta**
+3. Navigate to **Settings** → **Environment Variables**
+4. Add each variable above with its corresponding value
+5. Click **"Save"** after adding all variables
+6. Redeploy the application for changes to take effect
 
 ---
 
