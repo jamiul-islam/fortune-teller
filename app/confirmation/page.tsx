@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { IconAlertCircle, IconSparkles } from "@tabler/icons-react";
+import { IconAlertCircle } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import HeaderSection from "@/components/sections/HeaderSection";
 

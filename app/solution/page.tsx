@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { IconAlertCircle, IconSparkles, IconHome } from "@tabler/icons-react";
+import { IconAlertCircle, IconHome } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import HeaderSection from "@/components/sections/HeaderSection";
 import Particles from "@/components/ui/Particles";
@@ -169,126 +169,138 @@ export default function SolutionPage() {
   }
 
   return (
-    <div className="min-h-screen relative bg-background">
+    <div className="min-h-screen relative bg-muted/30">
       <HeaderSection onBookingClick={handleBookingClick} />
 
-      {/* Subtle Particle Background */}
-      <div className="absolute inset-0 z-0 opacity-30">
+      {/* Particles Background - Same as Categories Section */}
+      <div className="absolute inset-0 z-0">
         <Particles
-          particleColors={["#737373"]}
-          particleCount={200}
-          particleSpread={15}
-          speed={0.05}
-          particleBaseSize={80}
-          moveParticlesOnHover={false}
+          particleColors={["#ffffff"]}
+          particleCount={500}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover
           alphaParticles
           disableRotation={false}
           pixelRatio={1}
         />
       </div>
 
-      <div className="relative z-10 py-24 px-4">
-        <div className="max-w-4xl mx-auto space-y-8">
+      <div className="relative z-10 flex items-center justify-center py-20 px-4 sm:px-6 md:px-8">
+        <div className="w-full max-w-7xl">
           {/* Page Title */}
-          <motion.div
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
+            style={{ fontFamily: "var(--font-serif)", marginBottom: ".8em" }}
           >
-            <Card className="text-center">
-              <CardHeader>
-                <IconSparkles className="w-12 h-12 mx-auto mb-4 text-accent-gold" />
-                <CardTitle className="text-2xl md:text-3xl">
-                  {t("solution.title")}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Hello {booking.firstName}, here is your personalized guidance.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+            {t("solution.title")}
+          </motion.h2>
 
-          {/* Personalized Video (if available) */}
-          {booking.personalizedVideoUrl && (
+          <div className="space-y-6">
+            {/* Personalized Video Card (if available) */}
+            {booking.personalizedVideoUrl && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0 }}
+              >
+                <Card
+                  className="hover:shadow-md transition-shadow duration-200"
+                  style={{ padding: ".8em" }}
+                >
+                  <CardHeader className="pb-4">
+                    <div className="text-5xl mb-4">🎥</div>
+                    <CardTitle className="text-xl font-bold">
+                      Your Personal Message
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div
+                      className="relative w-full rounded-lg overflow-hidden"
+                      style={{ paddingBottom: "56.25%" }}
+                    >
+                      <iframe
+                        src={booking.personalizedVideoUrl}
+                        title="Personalized Video"
+                        className="absolute top-0 left-0 w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
+
+            {/* Fortune Note Card - Wide Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <Card>
-                <CardHeader>
-                  <CardTitle>Your Personal Message</CardTitle>
+              <Card
+                className="hover:shadow-md transition-shadow duration-200"
+                style={{ padding: ".8em" }}
+              >
+                <CardHeader className="pb-4">
+                  <div className="text-5xl mb-4">✨</div>
+                  <CardTitle className="text-xl font-bold">
+                    {t("solution.fortuneNote")}
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="p-0">
-                  <div
-                    className="relative w-full"
-                    style={{ paddingBottom: "56.25%" }}
-                  >
-                    <iframe
-                      src={booking.personalizedVideoUrl}
-                      title="Personalized Video"
-                      className="absolute top-0 left-0 w-full h-full rounded-lg"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
+                <CardContent className="pt-0">
+                  <p className="text-lg leading-relaxed text-foreground">
+                    {fortuneNote}
+                  </p>
                 </CardContent>
               </Card>
             </motion.div>
-          )}
 
-          {/* Fortune Note Card - Special Animation */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-          >
-            <Card className="border-accent-gold/20 bg-gradient-to-br from-muted/50 to-muted/30">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-accent-gold">
-                  <IconSparkles className="w-6 h-6" />
-                  {t("solution.fortuneNote")}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-lg leading-relaxed">{fortuneNote}</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Reassuring Final Message */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <Card className="text-center">
-              <CardContent className="py-8">
-                <p className="text-lg text-muted-foreground italic">
-                  {t("solution.finalMessage")}
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Discreet Book Again Link */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-center"
-          >
-            <Button
-              onClick={handleBookAgain}
-              variant="ghost"
-              size="sm"
-              className="text-muted-foreground hover:text-accent-gold transition-colors"
+            {/* Reassuring Final Message Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              {t("solution.bookAgain")}
-            </Button>
-          </motion.div>
+              <Card
+                className="hover:shadow-md transition-shadow duration-200"
+                style={{ padding: ".8em" }}
+              >
+                <CardHeader className="pb-4">
+                  <div className="text-5xl mb-4">🌟</div>
+                  <CardTitle className="text-xl font-bold">
+                    Your Path Forward
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-lg leading-relaxed text-muted-foreground italic">
+                    {t("solution.finalMessage")}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Book Again Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-center pt-8"
+            >
+              <Button
+                onClick={handleBookAgain}
+                variant="outline"
+                size="lg"
+                className="font-semibold"
+              >
+                {t("solution.bookAgain")}
+              </Button>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
