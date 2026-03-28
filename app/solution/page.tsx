@@ -169,10 +169,10 @@ export default function SolutionPage() {
   }
 
   return (
-    <div className="min-h-screen relative bg-muted/30">
+    <div className="min-h-screen relative bg-primary text-primary-foreground">
       <HeaderSection onBookingClick={handleBookingClick} />
 
-      {/* Particles Background - Same as Categories Section */}
+      {/* Particles Background - White particles on primary background */}
       <div className="absolute inset-0 z-0">
         <Particles
           particleColors={["#ffffff"]}
@@ -187,14 +187,14 @@ export default function SolutionPage() {
         />
       </div>
 
-      <div className="relative z-10 flex items-center justify-center py-20 px-4 sm:px-6 md:px-8">
+      <div className="relative z-10 flex items-center justify-center min-h-screen py-20 px-4 sm:px-6 md:px-8">
         <div className="w-full max-w-7xl">
           {/* Page Title */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 text-primary-foreground"
             style={{ fontFamily: "var(--font-serif)", marginBottom: ".8em" }}
           >
             {t("solution.title")}
