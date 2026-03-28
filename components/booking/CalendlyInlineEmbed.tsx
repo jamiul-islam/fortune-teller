@@ -11,8 +11,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/Button";
 import { IconAlertCircle } from "@tabler/icons-react";
+import { Button } from "@/components/ui/Button";
 
 interface CalendlyInlineEmbedProps {
   isOpen: boolean;
@@ -64,8 +64,14 @@ export function CalendlyInlineEmbed({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">
-        <DialogHeader className="px-6 pt-6">
+      <DialogContent
+        className="max-w-4xl max-h-[90vh] overflow-hidden p-0"
+        style={{ maxWidth: "70vw" }}
+      >
+        <DialogHeader
+          className="px-6 pt-6 text-center"
+          style={{ marginTop: ".8rem" }}
+        >
           <DialogTitle className="text-2xl font-bold">
             Book Your Reading
           </DialogTitle>
@@ -93,7 +99,7 @@ export function CalendlyInlineEmbed({
               </Button>
             </Alert>
           ) : (
-            <div className="w-full" style={{ height: "700px" }}>
+            <div className="w-full" style={{ height: "70vh" }}>
               <InlineWidget
                 url={calendlyUrl}
                 prefill={prefill}
