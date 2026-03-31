@@ -8,12 +8,17 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 interface HeaderSectionProps {
-  onBookingClick: () => void;
+  onBookingClick: (calendlyUrl: string) => void;
 }
 
 export default function HeaderSection({ onBookingClick }: HeaderSectionProps) {
   const t = useTranslations("header");
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleBookingClick = () => {
+    const defaultUrl = process.env.NEXT_PUBLIC_CALENDLY_URL_15 || "";
+    onBookingClick(defaultUrl);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,7 +72,7 @@ export default function HeaderSection({ onBookingClick }: HeaderSectionProps) {
 
           {/* Booking Button */}
           <button
-            onClick={onBookingClick}
+            onClick={handleBookingClick}
             className="flex items-center justify-center w-10 h-10 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105"
             aria-label={t("phone")}
             style={{

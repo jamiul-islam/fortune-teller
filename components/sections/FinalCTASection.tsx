@@ -1,16 +1,32 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Button } from "@/components/ui/Button";
+import { NativeSelect } from "@/components/ui/native-select";
 import { useTranslations } from "next-intl";
 
 interface FinalCTASectionProps {
-  onCtaClick: () => void;
+  onCtaClick: (calendlyUrl: string) => void;
 }
 
 export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
+  const [selectedDuration, setSelectedDuration] = useState<string>("15");
   const t = useTranslations("finalCta");
+
+  const calendlyUrls = {
+    "15": process.env.NEXT_PUBLIC_CALENDLY_URL_15 || "",
+    "30": process.env.NEXT_PUBLIC_CALENDLY_URL_30 || "",
+    "60": process.env.NEXT_PUBLIC_CALENDLY_URL_45 || "",
+  };
+
+  const handleBooking = () => {
+    const url = calendlyUrls[selectedDuration as keyof typeof calendlyUrls];
+    if (url) {
+      onCtaClick(url);
+    }
+  };
 
   return (
     <SectionWrapper className="flex items-center justify-center bg-primary text-primary-foreground">
@@ -34,19 +50,36 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
           >
             {t("subtitle")}
           </p>
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={onCtaClick}
-            className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl"
-            style={{
-              backgroundColor: "#FFFFFF",
-              color: "#000000",
-              padding: ".8em",
-            }}
-          >
-            {t("cta")}
-          </Button>
+          <div className="flex flex-col md:flex-row items-stretch justify-center gap-4 w-full max-w-3xl mx-auto">
+            <NativeSelect
+              value={selectedDuration}
+              onChange={(e) => setSelectedDuration(e.target.value)}
+              className="w-full md:flex-1 text-base font-medium shadow-lg max-w-full md:max-w-fit text-center"
+              style={{
+                backgroundColor: "#FFFFFF",
+                color: "#000000",
+                padding: "0.8em",
+                height: "auto",
+              }}
+            >
+              <option value="15">{t("duration15")}</option>
+              <option value="30">{t("duration30")}</option>
+              <option value="60">{t("duration60")}</option>
+            </NativeSelect>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={handleBooking}
+              className="font-semibold text-md px-8 py-6 h-auto shadow-2xl w-full md:w-auto md:shrink-0"
+              style={{
+                backgroundColor: "#FFFFFF",
+                color: "#000000",
+                padding: ".8em",
+              }}
+            >
+              {t("cta")}
+            </Button>
+          </div>
         </motion.div>
       </div>
     </SectionWrapper>

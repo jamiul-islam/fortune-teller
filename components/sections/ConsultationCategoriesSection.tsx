@@ -16,7 +16,7 @@ interface Category {
 }
 
 interface ConsultationCategoriesSectionProps {
-  onBookingClick: () => void;
+  onBookingClick: (calendlyUrl: string) => void;
 }
 
 export default function ConsultationCategoriesSection({
@@ -30,6 +30,11 @@ export default function ConsultationCategoriesSection({
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  const handleBookingClick = () => {
+    const defaultUrl = process.env.NEXT_PUBLIC_CALENDLY_URL_15 || "";
+    onBookingClick(defaultUrl);
+  };
 
   const categories: Category[] = [
     {
@@ -144,9 +149,13 @@ export default function ConsultationCategoriesSection({
                   <Button
                     variant="default"
                     size="default"
-                    onClick={onBookingClick}
+                    onClick={handleBookingClick}
                     className="w-full mt-auto"
-                    style={{ backgroundColor: "gray", color: "white" }}
+                    style={{
+                      backgroundColor: "gray",
+                      color: "white",
+                      marginTop: ".8em",
+                    }}
                   >
                     {t("bookNow")}
                   </Button>
