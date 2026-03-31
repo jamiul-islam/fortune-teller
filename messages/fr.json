@@ -10,6 +10,7 @@
   },
   "categories": {
     "title": "Quelle est votre préoccupation urgente aujourd'hui?",
+    "bookNow": "Réserver Maintenant",
     "love": {
       "title": "Amour & Relations",
       "items": [

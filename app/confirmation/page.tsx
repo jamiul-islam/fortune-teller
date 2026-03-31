@@ -313,6 +313,44 @@ export default function ConfirmationPage() {
             </CardContent>
           </Card>
         </motion.div>
+
+        {/* WhatsApp Chat Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          className="max-w-md w-full mt-4"
+          style={{ marginTop: ".8em" }}
+        >
+          <Card
+            className="bg-primary backdrop-blur-md border-primary/30"
+            style={{
+              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+            }}
+          >
+            <CardContent
+              className="py-6 text-center"
+              style={{ padding: "1.2em" }}
+            >
+              <p className="text-primary-foreground font-medium mb-4">
+                Have questions? Chat with us on WhatsApp
+              </p>
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() =>
+                  window.open(
+                    process.env.NEXT_PUBLIC_WHATSAPP_CHAT_LINK,
+                    "_blank",
+                  )
+                }
+                className="w-full font-semibold"
+              >
+                Start WhatsApp Chat
+              </Button>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </div>
   );
