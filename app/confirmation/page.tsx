@@ -191,12 +191,35 @@ export default function ConfirmationPage() {
       </div>
 
       {/* Content - Vertically and horizontally centered */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 md:px-8 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 md:px-8 text-center py-20">
+        {/* Welcome Hero Video */}
+        {process.env.NEXT_PUBLIC_WELCOME_HERO_VIDEO_URL && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            className="w-full max-w-2xl mb-6"
+          >
+            <div className="w-full aspect-video">
+              <iframe
+                src={process.env.NEXT_PUBLIC_WELCOME_HERO_VIDEO_URL}
+                title="Welcome Video"
+                className="w-full h-full rounded-lg shadow-lg"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{
+                  border: "none",
+                }}
+              />
+            </div>
+          </motion.div>
+        )}
+
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight"
           style={{
             fontFamily: "var(--font-serif)",
             color: "#FFFFFF",
@@ -226,14 +249,14 @@ export default function ConfirmationPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-          className="flex flex-col sm:flex-row gap-4 mb-12"
-          style={{ marginBottom: "1em" }}
+          className="flex flex-col sm:flex-row gap-4 mb-6"
+          style={{ marginBottom: "0.8em" }}
         >
           <Button
             variant="default"
             size="lg"
             onClick={handleYourSolution}
-            className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl"
+            className="font-semibold text-base sm:text-lg px-8 py-4 h-auto shadow-2xl"
             style={{
               backgroundColor: "#FFFFFF",
               color: "#000000",
@@ -247,7 +270,7 @@ export default function ConfirmationPage() {
             onClick={handleNewConsultation}
             variant="default"
             size="lg"
-            className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl border-2"
+            className="font-semibold text-base sm:text-lg px-8 py-4 h-auto shadow-2xl border-2"
             style={{
               backgroundColor: "rgba(255, 255, 255, 0.08)",
               color: "#FFFFFF",
@@ -266,7 +289,7 @@ export default function ConfirmationPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          className="max-w-md w-full"
+          className="max-w-md w-full mb-4"
         >
           <Card
             className="bg-card/10 backdrop-blur-md border-white/20"
@@ -275,8 +298,8 @@ export default function ConfirmationPage() {
             }}
           >
             <CardContent
-              className="py-6 space-y-3 text-sm"
-              style={{ padding: "0.8em" }}
+              className="py-4 space-y-2 text-sm"
+              style={{ padding: "0.6em" }}
             >
               <div className="flex justify-between">
                 <span style={{ color: "rgba(255, 255, 255, 0.7)" }}>
@@ -319,8 +342,8 @@ export default function ConfirmationPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="max-w-md w-full mt-4"
-          style={{ marginTop: ".8em" }}
+          className="max-w-md w-full mt-3"
+          style={{ marginTop: "0.6em" }}
         >
           <Card
             className="bg-primary backdrop-blur-md border-primary/30"
@@ -329,10 +352,10 @@ export default function ConfirmationPage() {
             }}
           >
             <CardContent
-              className="py-6 text-center"
-              style={{ padding: "1.2em" }}
+              className="py-4 text-center"
+              style={{ padding: "0.8em" }}
             >
-              <p className="text-primary-foreground font-medium mb-4">
+              <p className="text-primary-foreground font-medium mb-3 text-sm sm:text-base">
                 Have questions? Chat with us on WhatsApp
               </p>
               <Button

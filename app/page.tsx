@@ -8,6 +8,8 @@ import SocialProofSection from "@/components/sections/SocialProofSection";
 import TrustSection from "@/components/sections/TrustSection";
 import FinalCTASection from "@/components/sections/FinalCTASection";
 import { CalendlyInlineEmbed } from "@/components/booking/CalendlyInlineEmbed";
+import { YouTubeVideo } from "@/components/ui/YouTubeVideo";
+import SectionWrapper from "@/components/ui/SectionWrapper";
 
 export default function Home() {
   const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
@@ -31,6 +33,17 @@ export default function Home() {
       />
       <ConsultationCategoriesSection onBookingClick={handleCtaClick} />
       <SocialProofSection />
+
+      {/* Homepage Video Section */}
+      {process.env.NEXT_PUBLIC_HOMEPAGE_VIDEO_URL && (
+        <SectionWrapper className="py-12 md:py-16 bg-background">
+          <YouTubeVideo
+            videoUrl={process.env.NEXT_PUBLIC_HOMEPAGE_VIDEO_URL}
+            title="About Our Services"
+          />
+        </SectionWrapper>
+      )}
+
       <TrustSection />
       <FinalCTASection onCtaClick={handleCtaClick} />
 
