@@ -50,11 +50,11 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
           >
             {t("subtitle")}
           </p>
-          <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto">
+          <div className="flex flex-col md:flex-row items-stretch gap-4 w-full max-w-3xl mx-auto">
             <NativeSelect
               value={selectedDuration}
               onChange={(e) => setSelectedDuration(e.target.value)}
-              className="w-full text-base font-medium shadow-lg"
+              className="w-full md:flex-1 text-base font-medium shadow-lg"
               style={{
                 backgroundColor: "#FFFFFF",
                 color: "#000000",
@@ -70,7 +70,7 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
               variant="outline"
               size="lg"
               onClick={handleBooking}
-              className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl w-full"
+              className="font-semibold text-md px-8 py-6 h-auto shadow-2xl w-full md:w-auto md:shrink-0"
               style={{
                 backgroundColor: "#FFFFFF",
                 color: "#000000",

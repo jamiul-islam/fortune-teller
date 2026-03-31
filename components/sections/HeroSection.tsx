@@ -127,12 +127,12 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-          className="flex flex-col items-center gap-4 w-full max-w-md"
+          className="flex flex-col md:flex-row items-stretch gap-4 w-full max-w-3xl"
         >
           <NativeSelect
             value={selectedDuration}
             onChange={(e) => setSelectedDuration(e.target.value)}
-            className="w-full text-base font-medium shadow-lg"
+            className="w-full md:flex-1 text-base font-medium shadow-lg"
             style={{
               backgroundColor: "#FFFFFF",
               color: "#000000",
@@ -148,7 +148,7 @@ export default function HeroSection({
             variant="default"
             size="lg"
             onClick={handleBooking}
-            className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl w-full"
+            className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl w-full md:w-auto md:shrink-0"
             style={{
               backgroundColor: "#FFFFFF",
               color: "#000000",
