@@ -58,6 +58,38 @@ If you need more requests or features, consider:
 2. Click "Detect Language by Location"
 3. View your detected country and language
 
+or
+
+```javascript
+//   to test auto detection
+sessionStorage.clear();
+document.cookie = "NEXT_LOCALE=; path=/; max-age=0";
+location.reload();
+
+// to test french
+document.cookie = "NEXT_LOCALE=fr; path=/; max-age=31536000";
+location.reload();
+
+// test current language state
+console.log("=== Current Language State ===");
+console.log("HTML lang:", document.documentElement.lang);
+console.log(
+  "Cookie:",
+  document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("NEXT_LOCALE="))
+    ?.split("=")[1] || "not set",
+);
+console.log("Detection ran:", sessionStorage.getItem("geo_language_detected"));
+console.log("Browser language:", navigator.language);
+
+// reset everything
+console.log("🔄 Resetting... Auto-detection will run on reload");
+sessionStorage.removeItem("geo_language_detected");
+document.cookie = "NEXT_LOCALE=; path=/; max-age=0";
+location.reload();
+```
+
 ## Privacy Considerations
 
 - Only uses IP-based geolocation (no GPS or precise location)
