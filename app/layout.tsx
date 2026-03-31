@@ -5,6 +5,7 @@ import { Noto_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { GeoLanguageDetector } from "@/components/GeoLanguageDetector";
 
 const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
     <html lang={locale} className={cn("font-sans", notoSans.variable)}>
       <body>
         <NextIntlClientProvider messages={messages}>
+          <GeoLanguageDetector />
           {children}
           <FooterSection />
         </NextIntlClientProvider>
