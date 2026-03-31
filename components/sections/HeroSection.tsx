@@ -4,11 +4,12 @@ import { useState, useRef } from "react";
 import { motion } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Button } from "@/components/ui/Button";
+import { NativeSelect } from "@/components/ui/native-select";
 import { useTranslations } from "next-intl";
 
 interface HeroSectionProps {
   videoUrl: string;
-  onCtaClick: () => void;
+  onCtaClick: (calendlyUrl: string) => void;
 }
 
 export default function HeroSection({
@@ -16,8 +17,22 @@ export default function HeroSection({
   onCtaClick,
 }: HeroSectionProps) {
   const [videoError, setVideoError] = useState(false);
+  const [selectedDuration, setSelectedDuration] = useState<string>("15");
   const sectionRef = useRef<HTMLDivElement>(null);
   const t = useTranslations("hero");
+
+  const calendlyUrls = {
+    "15": process.env.NEXT_PUBLIC_CALENDLY_URL_15 || "",
+    "30": process.env.NEXT_PUBLIC_CALENDLY_URL_30 || "",
+    "60": process.env.NEXT_PUBLIC_CALENDLY_URL_45 || "",
+  };
+
+  const handleBooking = () => {
+    const url = calendlyUrls[selectedDuration as keyof typeof calendlyUrls];
+    if (url) {
+      onCtaClick(url);
+    }
+  };
 
   // Extract YouTube video ID from URL
   const getYouTubeEmbedUrl = (url: string) => {
@@ -112,12 +127,28 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          className="flex flex-col items-center gap-4 w-full max-w-md"
         >
+          <NativeSelect
+            value={selectedDuration}
+            onChange={(e) => setSelectedDuration(e.target.value)}
+            className="w-full text-base font-medium shadow-lg"
+            style={{
+              backgroundColor: "#FFFFFF",
+              color: "#000000",
+              padding: "0.8em",
+              height: "auto",
+            }}
+          >
+            <option value="15">{t("duration15")}</option>
+            <option value="30">{t("duration30")}</option>
+            <option value="60">{t("duration60")}</option>
+          </NativeSelect>
           <Button
             variant="default"
             size="lg"
-            onClick={onCtaClick}
-            className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl"
+            onClick={handleBooking}
+            className="font-semibold text-lg px-8 py-6 h-auto shadow-2xl w-full"
             style={{
               backgroundColor: "#FFFFFF",
               color: "#000000",

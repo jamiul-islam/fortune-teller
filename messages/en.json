@@ -6,7 +6,11 @@
   "hero": {
     "title": "Your future is trying to speak to you",
     "subtitle": "Clarity. Guidance. Immediate answers",
-    "cta": "Book a Reading"
+    "cta": "Book a Reading",
+    "selectDuration": "Select consultation duration",
+    "duration15": "$15 - 15 minutes",
+    "duration30": "$25 - 30 minutes",
+    "duration60": "$45 - 60 minutes"
   },
   "categories": {
     "title": "What is your urgent concern today?",
@@ -97,6 +101,10 @@
   "finalCta": {
     "title": "Ready to discover your path?",
     "subtitle": "Book your consultation now and receive immediate guidance",
-    "cta": "Book a Reading"
+    "cta": "Book a Reading",
+    "selectDuration": "Select consultation duration",
+    "duration15": "$15 - 15 minutes",
+    "duration30": "$25 - 30 minutes",
+    "duration60": "$45 - 60 minutes"
   }
 }

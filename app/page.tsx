@@ -11,8 +11,10 @@ import { CalendlyInlineEmbed } from "@/components/booking/CalendlyInlineEmbed";
 
 export default function Home() {
   const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+  const [selectedCalendlyUrl, setSelectedCalendlyUrl] = useState<string>("");
 
-  const handleCtaClick = () => {
+  const handleCtaClick = (calendlyUrl: string) => {
+    setSelectedCalendlyUrl(calendlyUrl);
     setIsCalendlyOpen(true);
   };
 
@@ -35,6 +37,7 @@ export default function Home() {
       <CalendlyInlineEmbed
         isOpen={isCalendlyOpen}
         onClose={handleCloseCalendly}
+        calendlyUrl={selectedCalendlyUrl}
       />
     </main>
   );

@@ -6,7 +6,11 @@
   "hero": {
     "title": "Votre avenir essaie de vous parler",
     "subtitle": "Clarté. Guidance. Réponses immédiates",
-    "cta": "Réserver une Lecture"
+    "cta": "Réserver une Lecture",
+    "selectDuration": "Sélectionner la durée de consultation",
+    "duration15": "15$ - 15 minutes",
+    "duration30": "25$ - 30 minutes",
+    "duration60": "45$ - 60 minutes"
   },
   "categories": {
     "title": "Quelle est votre préoccupation urgente aujourd'hui?",
@@ -101,6 +105,10 @@
   "finalCta": {
     "title": "Prêt à découvrir votre chemin?",
     "subtitle": "Réservez votre consultation maintenant et recevez des conseils immédiats",
-    "cta": "Réserver une Lecture"
+    "cta": "Réserver une Lecture",
+    "selectDuration": "Sélectionner la durée de consultation",
+    "duration15": "15$ - 15 minutes",
+    "duration30": "25$ - 30 minutes",
+    "duration60": "45$ - 60 minutes"
   }
 }

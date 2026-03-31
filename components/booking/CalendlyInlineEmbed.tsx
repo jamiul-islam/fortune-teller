@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/Button";
 interface CalendlyInlineEmbedProps {
   isOpen: boolean;
   onClose: () => void;
+  calendlyUrl?: string;
   prefill?: {
     name?: string;
     email?: string;
@@ -26,6 +27,7 @@ interface CalendlyInlineEmbedProps {
 export function CalendlyInlineEmbed({
   isOpen,
   onClose,
+  calendlyUrl: propCalendlyUrl,
   prefill,
 }: CalendlyInlineEmbedProps) {
   const router = useRouter();
@@ -33,15 +35,15 @@ export function CalendlyInlineEmbed({
   const [embedError, setEmbedError] = useState(false);
 
   useEffect(() => {
-    // Check if NEXT_PUBLIC_CALENDLY_URL exists
-    const url = process.env.NEXT_PUBLIC_CALENDLY_URL;
+    // Use prop URL if provided, otherwise fall back to env variable
+    const url = propCalendlyUrl || process.env.NEXT_PUBLIC_CALENDLY_URL;
     if (!url) {
       setEmbedError(true);
-      console.error("NEXT_PUBLIC_CALENDLY_URL is not configured");
+      console.error("No Calendly URL provided");
     } else {
       setCalendlyUrl(url);
     }
-  }, []);
+  }, [propCalendlyUrl]);
 
   // Listen for Calendly event_scheduled postMessage
   useCalendlyEventListener({
@@ -111,7 +113,7 @@ export function CalendlyInlineEmbed({
 
   const handleRetry = () => {
     setEmbedError(false);
-    const url = process.env.NEXT_PUBLIC_CALENDLY_URL;
+    const url = propCalendlyUrl || process.env.NEXT_PUBLIC_CALENDLY_URL;
     if (url) {
       setCalendlyUrl(url);
     } else {
