@@ -30,7 +30,7 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
 
   return (
     <SectionWrapper className="flex items-center justify-center bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center py-20">
+      <div className="container mx-auto flex justify-center px-4 sm:px-6 md:px-8 text-center py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
