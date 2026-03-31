@@ -27,7 +27,7 @@ export default function Home() {
         videoUrl={process.env.NEXT_PUBLIC_HERO_VIDEO_URL || ""}
         onCtaClick={handleCtaClick}
       />
-      <ConsultationCategoriesSection />
+      <ConsultationCategoriesSection onBookingClick={handleCtaClick} />
       <SocialProofSection />
       <TrustSection />
       <FinalCTASection onCtaClick={handleCtaClick} />

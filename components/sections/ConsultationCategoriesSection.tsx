@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/Button";
 import Particles from "../ui/Particles";
 import { useTranslations } from "next-intl";
 
@@ -14,7 +15,13 @@ interface Category {
   icon: string;
 }
 
-export default function ConsultationCategoriesSection() {
+interface ConsultationCategoriesSectionProps {
+  onBookingClick: () => void;
+}
+
+export default function ConsultationCategoriesSection({
+  onBookingClick,
+}: ConsultationCategoriesSectionProps) {
   const t = useTranslations("categories");
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -122,7 +129,7 @@ export default function ConsultationCategoriesSection() {
                 </CardHeader>
                 <CardContent className="pt-0">
                   {/* Subcategories */}
-                  <ul className="space-y-3">
+                  <ul className="space-y-3 mb-6">
                     {category.subcategories.map((sub, idx) => (
                       <li
                         key={idx}
@@ -132,6 +139,16 @@ export default function ConsultationCategoriesSection() {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Book Now Button */}
+                  <Button
+                    variant="default"
+                    size="default"
+                    onClick={onBookingClick}
+                    className="w-full"
+                  >
+                    {t("bookNow")}
+                  </Button>
                 </CardContent>
               </MotionCard>
             );
