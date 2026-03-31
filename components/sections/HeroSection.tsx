@@ -127,12 +127,12 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-          className="flex flex-col md:flex-row items-stretch gap-4 w-full max-w-3xl"
+          className="flex flex-col md:flex-row items-stretch justify-center gap-4 w-full max-w-3xl"
         >
           <NativeSelect
             value={selectedDuration}
             onChange={(e) => setSelectedDuration(e.target.value)}
-            className="w-full md:flex-1 text-base font-medium shadow-lg"
+            className="w-full md:flex-1 text-base font-medium shadow-lg max-w-full md:max-w-fit text-center"
             style={{
               backgroundColor: "#FFFFFF",
               color: "#000000",

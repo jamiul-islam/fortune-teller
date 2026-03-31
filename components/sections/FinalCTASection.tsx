@@ -50,11 +50,11 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
           >
             {t("subtitle")}
           </p>
-          <div className="flex flex-col md:flex-row items-stretch gap-4 w-full max-w-3xl mx-auto">
+          <div className="flex flex-col md:flex-row items-stretch justify-center gap-4 w-full max-w-3xl mx-auto">
             <NativeSelect
               value={selectedDuration}
               onChange={(e) => setSelectedDuration(e.target.value)}
-              className="w-full md:flex-1 text-base font-medium shadow-lg"
+              className="w-full md:flex-1 text-base font-medium shadow-lg max-w-full md:max-w-fit text-center"
               style={{
                 backgroundColor: "#FFFFFF",
                 color: "#000000",
