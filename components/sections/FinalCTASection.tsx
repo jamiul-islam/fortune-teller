@@ -40,7 +40,7 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
         >
           <h2
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
-            style={{ fontFamily: "var(--font-serif)" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#FFFFFF" }}
           >
             {t("title")}
           </h2>
@@ -56,8 +56,9 @@ export default function FinalCTASection({ onCtaClick }: FinalCTASectionProps) {
               onChange={(e) => setSelectedDuration(e.target.value)}
               className="w-full md:flex-1 text-base font-medium shadow-lg max-w-full md:max-w-fit text-center"
               style={{
-                backgroundColor: "#FFFFFF",
-                color: "#000000",
+                backgroundColor: "rgba(255, 255, 255, 0.08)",
+                color: "#FFFFFF",
+                borderColor: "rgba(255, 255, 255, 0.1)",
                 padding: "0.8em",
                 height: "auto",
               }}

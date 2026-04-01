@@ -93,7 +93,7 @@ export default function SolutionPage() {
         <div className="absolute inset-0 z-0 opacity-30">
           <Particles
             particleColors={["#737373"]}
-            particleCount={200}
+            particleCount={300}
             particleSpread={15}
             speed={0.05}
             particleBaseSize={80}

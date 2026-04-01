@@ -106,5 +106,9 @@
     "duration15": "$15 - 15 minutes",
     "duration30": "$25 - 30 minutes",
     "duration60": "$45 - 60 minutes"
+  },
+  "videoSection": {
+    "title": "Real Stories, Real Transformations",
+    "subtitle": "Watch how our consultations have guided people just like you"
   }
 }
